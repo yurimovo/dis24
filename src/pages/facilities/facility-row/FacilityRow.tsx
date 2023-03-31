@@ -1,11 +1,11 @@
 import React from 'react';
 
-const MainPage = () => {
+const FacilityRow = () => {
     return (
         <div>
-            Main Page
+            Facility Row
         </div>
     );
 };
 
-export default MainPage;
+export default FacilityRow;
