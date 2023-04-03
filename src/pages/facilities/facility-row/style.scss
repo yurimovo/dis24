@@ -1,0 +1,17 @@
+.facilityRow {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+    border: 1px solid #fad3ca;
+    background-color: #fff5f2;
+    :hover {
+        background-color: #fad3ca;
+    }
+}
+
+.rowElement {
+    border: 1px solid #fff5f2;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+}

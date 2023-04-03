@@ -6,16 +6,20 @@ import MainPage from "./pages/main-page/MainPage";
 import Facilities from "./pages/facilities/Facilities";
 import NewFacility from "./pages/facilities/new-facility/NewFacility";
 
+import "./main-container.scss";
+
 function App() {
     return (
         <div className="App">
-            <Header />
-            <Routes>
-                <Route path={'/'} element={<MainPage />} />
-                <Route path={'/facilities'} element={<Facilities />} />
-                <Route path={'/new-facility'} element={<NewFacility />} />
-                <Route path="*" element={<MainPage />} />
-            </Routes>
+            <div className='template-container'>
+                <Header />
+                <Routes>
+                    <Route path={'/'} element={<MainPage />} />
+                    <Route path={'/facilities'} element={<Facilities />} />
+                    <Route path={'/new-facility'} element={<NewFacility />} />
+                    <Route path="*" element={<MainPage />} />
+                </Routes>
+            </div>
         </div>
     );
 }

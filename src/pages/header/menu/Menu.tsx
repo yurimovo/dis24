@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import "./style.scss";
+
 const MenuBar = () => {
     return (
         <nav className='container'>
             <ul>
-                <li><Link to="/">Главная</Link></li>
-                <li><Link to="/facilities">Объекты</Link></li>
+                <a href="#"><Link to="/">Главная</Link></a>
+                <a href="#"><Link to="/facilities">Объекты</Link></a>
             </ul>
         </nav>
     );
