@@ -7,6 +7,8 @@ import Facilities from "./pages/facilities/Facilities";
 import NewFacility from "./pages/facilities/new-facility/NewFacility";
 
 import "./main-container.scss";
+import Apartments from './pages/apartments/Apartments';
+import NewApartment from './pages/apartments/new-apartment/NewApartment';
 
 function App() {
     return (
@@ -17,6 +19,8 @@ function App() {
                     <Route path={'/'} element={<MainPage />} />
                     <Route path={'/facilities'} element={<Facilities />} />
                     <Route path={'/new-facility'} element={<NewFacility />} />
+                    <Route path={'/apartments'} element={<Apartments />} />
+                    <Route path={'/new-apartment'} element={<NewApartment />} />
                     <Route path="*" element={<MainPage />} />
                 </Routes>
             </div>

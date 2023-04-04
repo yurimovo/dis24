@@ -6,9 +6,16 @@ import "./style.scss";
 const MenuBar = () => {
     return (
         <nav className='container'>
-            <ul>
-                <a href="#"><Link to="/">Главная</Link></a>
-                <a href="#"><Link to="/facilities">Объекты</Link></a>
+            <ul className='menuContainer'>
+                <li>
+                    <a href='#'><Link to="/">Главная</Link></a>
+                </li>
+                <li>
+                    <a href='#'><Link to="/facilities">Объекты</Link></a>
+                </li>
+                <li>
+                    <a href='#'><Link to="/apartments">Квартиры</Link></a>
+                </li>
             </ul>
         </nav>
     );

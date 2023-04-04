@@ -2,7 +2,7 @@ ul {
     list-style: none;
 }
 
-a {
+li a {
     text-decoration: none;
     outline: none;
     background-color: #b8783d;
@@ -10,8 +10,13 @@ a {
     margin: 10px;
     color: #fff;
     border-radius: 4px;
+    :hover {
+        color: #fad3ca;
+    }
 }
 
-a::hover {
-    color: #eb770c;
+.menuContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
 }

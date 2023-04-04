@@ -8,7 +8,7 @@ const UserBar = () => {
     return (
         <div className='userbar'>
             <div className='userName'>User name</div>
-            <div className='userAvatar'><img src={AvatarImage} /></div>
+            <div className='userAvatar'><img src={AvatarImage} alt='User avatar' /></div>
         </div>
     );
 };
