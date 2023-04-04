@@ -33,7 +33,7 @@ const Apartments = () => {
     return (
         <div className='container apartments'>
             <div className='row pageHeader'>
-                Дислокация объектов
+                Дислокация квартир и МХИГ
             </div>
             <div className='row tableHeader'>
                 <div className='col-xxl-1 col-xl-1 col-lg-1 col-md-1 headerItem'>№ п/п</div>

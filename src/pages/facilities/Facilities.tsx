@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
 import { Facility } from '../../types/facilities';
 
@@ -8,6 +9,9 @@ import NewFacility from "./new-facility/NewFacility";
 import "./style.scss";
 
 const Facilities = () => {
+    const [showModal, setShowModal] = useState<boolean>(false);
+
+    const handleToggleModal = () => setShowModal(!showModal);
 
     const facilitiesList = [
         {
@@ -54,9 +58,31 @@ const Facilities = () => {
             </div>
             <div className='row'>
                 <div className='col-xl-12 col-lg-12-col-md-12'>
-                    <button type="button" className="btnFacilityAdd">Новый объект</button>
+                    <Button variant='success' onClick={handleToggleModal} style={{marginTop: '20px'}}>
+                        Добавить
+                    </Button>
                 </div>
             </div>
+            <>
+                <Modal show={showModal} onHide={handleToggleModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Добавление объекта</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Организация</p>
+                        <p>Объект</p>
+                        <p>Адрес</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleToggleModal}>
+                            Закрыть
+                        </Button>
+                        <Button variant="primary" onClick={handleToggleModal}>
+                            Сохранить
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
         </div>
     );
 };
