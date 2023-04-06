@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Form, Button } from 'react-bootstrap';
 
 import { Facility } from '../../types/facilities';
 
@@ -9,30 +9,19 @@ import NewFacility from "./new-facility/NewFacility";
 import "./style.scss";
 
 const Facilities = () => {
+
     const [showModal, setShowModal] = useState<boolean>(false);
 
     const handleToggleModal = () => setShowModal(!showModal);
 
-    const facilitiesList = [
-        {
-            uid: 111,
-            organization: 'и.п. Иванов И.И.',
-            facility: 'маг. и.п. Иванова И.И.',
-            address: 'г. Калачинск, ул. Ленина, д. 37',
-        },
-        {
-            uid: 222,
-            organization: 'и.п. Петров П.П.',
-            facility: 'маг. и.п. Петрова П.П.',
-            address: 'г. Калачинск, ул. Ленина, д. 42',
-        },
-        {
-            uid: 333,
-            organization: 'и.п. Сидоров С.С.',
-            facility: 'маг. и.п. Сидорова С.С.',
-            address: 'г. Калачинск, ул. Ленина, д. 16',
-        },
-    ]
+    const handleFacilitySave = () => {
+        console.log('Facility saved...');
+        setShowModal(false);
+    };
+
+    const handleFacilityCancel = () => {
+        setShowModal(false);
+    };
 
     return (
         <div className='container facilities'>
@@ -63,26 +52,32 @@ const Facilities = () => {
                     </Button>
                 </div>
             </div>
-            <>
-                <Modal show={showModal} onHide={handleToggleModal} centered>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Добавление объекта</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p>Организация</p>
-                        <p>Объект</p>
-                        <p>Адрес</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleToggleModal}>
-                            Закрыть
-                        </Button>
-                        <Button variant="primary" onClick={handleToggleModal}>
-                            Сохранить
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
+            <Modal show={showModal} onHide={handleToggleModal} centered size='lg'>
+                <Modal.Header className='modalHeader' closeButton>
+                    <Modal.Title>Добавление объекта</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className='modalBody'>
+                    <div className='container'>
+                        <div className='row justify-content-start align-items-start'>
+                            <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                                <Form.Control className='textField' type='text' placeholder='Организация' id='organization' />
+                                <Form.Control className='textField' type='text' placeholder='Объект' id='facility' />
+                            </div>
+                            <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                                <Form.Control className='textField' type='text' placeholder='Адрес' id='address' />
+                            </div>
+                        </div>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer className='modalFooter'>
+                    <Button variant="secondary" onClick={handleFacilityCancel}>
+                        Закрыть
+                    </Button>
+                    <Button variant="success" onClick={handleFacilitySave}>
+                        Сохранить
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };

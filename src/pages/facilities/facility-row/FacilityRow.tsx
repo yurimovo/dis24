@@ -20,13 +20,13 @@ const FacilityRow: React.FC<IFacility> = ({facility, idx}) => {
                     {idx}
                 </div>
                 <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 rowElement'>
-                    {facility.organization}
+                    {facility.facilityName}
                 </div>
                 <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 rowElement'>
-                    {facility.facility}
+                    {facility.facilityName}
                 </div>
                 <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 rowElement'>
-                    {facility.address}
+                    {facility.facilityAddress}
                 </div>
                 <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2 rowElement actions'>
                     <img src={EditIcon} alt='Edit Icon' />
