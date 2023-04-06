@@ -1,6 +1,6 @@
 import { Facility } from "../../types/facilities";
 
-export const createFacility = async (organizationId: number, data: Facility) => {
+export const createFacility = async (data: Facility) => {
     const facilityData = JSON.stringify(data)
     try {
         await fetch('/api/facilities/facility_add', {

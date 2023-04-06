@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 import { Facility } from '../../types/facilities';
 
 import FacilityRow from "./facility-row/FacilityRow";
-import NewFacility from "./new-facility/NewFacility";
 
 import "./style.scss";
 
 const Facilities = () => {
+    const organizationId = 123;
 
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const [facilities, setFacilities] = useState<Array<Facility>>([]);
 
     const handleToggleModal = () => setShowModal(!showModal);
 
@@ -22,6 +25,20 @@ const Facilities = () => {
     const handleFacilityCancel = () => {
         setShowModal(false);
     };
+
+    const handleFetchFacilities = async () => {
+        setLoading(true);
+        await axios.get('/api/facilities/facility_list')
+            .then(res => {
+                const facilitiesList = res.data;
+                setFacilities(facilitiesList);
+            });
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        handleFetchFacilities();
+    }, [organizationId])
 
     return (
         <div className='container facilities'>
@@ -37,7 +54,7 @@ const Facilities = () => {
             </div>
             <div className='row'>
                 {
-                    (facilitiesList || []).map((facility: Facility, idx) => (
+                    (facilities || []).map((facility: Facility, idx) => (
                         <FacilityRow
                             facility={facility}
                             idx={idx+1}
