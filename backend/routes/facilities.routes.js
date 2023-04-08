@@ -3,10 +3,10 @@ const Router = require('express');
 const router = Router();
 
 router.get('/facility_list', async (req, res) => {
-    const facilityList = await prisma.facilities.findMany({
-        orderBy: {facility_name: 'asc'}
-    });
-    res.status(201).json({ message: 'Список получен' })
+    const { organizationId } = req.body;
+    const facilityList = await prisma.organizations.findUnique({
+        where: { id: organizationId }
+    }).facilities()
     res.json(facilityList);
 });
 
@@ -31,7 +31,6 @@ router.post('/facility_add', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' });
     }
-    
 });
 
 module.exports = router;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 import { Facility } from '../../types/facilities';
@@ -8,12 +7,12 @@ import FacilityRow from "./facility-row/FacilityRow";
 
 import "./style.scss";
 
-const Facilities = () => {
-    const organizationId = 123;
+interface IFacilities {
+    facilities: Array<Facility>;
+}
 
+const Facilities: React.FC<IFacilities> = ({ facilities }) => {
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [isLoading, setLoading] = useState<boolean>(false);
-    const [facilities, setFacilities] = useState<Array<Facility>>([]);
 
     const handleToggleModal = () => setShowModal(!showModal);
 
@@ -25,20 +24,6 @@ const Facilities = () => {
     const handleFacilityCancel = () => {
         setShowModal(false);
     };
-
-    const handleFetchFacilities = async () => {
-        setLoading(true);
-        await axios.get('/api/facilities/facility_list')
-            .then(res => {
-                const facilitiesList = res.data;
-                setFacilities(facilitiesList);
-            });
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        handleFetchFacilities();
-    }, [organizationId])
 
     return (
         <div className='container facilities'>

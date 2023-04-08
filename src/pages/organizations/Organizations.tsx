@@ -3,22 +3,30 @@ import { Accordion, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Organization } from '../../types/organizations';
 
+import './style.scss';
+import OrganizationRow from "./organization-row/OrganizationRow";
+import {fetchOrganizations} from "../../service-functions/organizations/fetchOrganizations";
+
 const Organizations = () => {
     const [organizations, setOrganizations] = useState<Array<Organization>>([]);
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    const fetchOrganizations = () => {
+    const getOrganizations = () => {
         setLoading(true);
-        try {
-            axios.get('/api/organizations/organizations_list')
-                .then(res => {
-                    setOrganizations(res.data);
-                });
-        } catch (e) {
-            throw e;
-        }
-        setLoading(false);
-    }
+            fetchOrganizations()
+              .then(response => {
+                console.log("Response", response);
+                setOrganizations(response);
+                setLoading(false);
+              }).catch(error => {
+                console.error(error);
+                setLoading(false);
+            });
+    };
+
+    useEffect(() => {
+        getOrganizations();
+    },[]);
 
     return (
         <div className='container organizationsContainer'>
@@ -29,31 +37,14 @@ const Organizations = () => {
             </div>
             <div className='row'>
                 <div className='col-xxl-12 col-xl-12 col-lg-12 col-md-12'>
-                    <Accordion defaultActiveKey="0">
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header>Accordion Item #1</Accordion.Header>
-                            <Accordion.Body>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.
-                            </Accordion.Body>
-                        </Accordion.Item>
-                        <Accordion.Item eventKey="1">
-                            <Accordion.Header>Accordion Item #2</Accordion.Header>
-                            <Accordion.Body>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.
-                            </Accordion.Body>
-                        </Accordion.Item>
+                    <Accordion defaultActiveKey="0" className="accordion">
+                        {organizations.map((organization: Organization, idx) => (
+                            <OrganizationRow
+                                organization={organization}
+                                key={organization.uid}
+                                idx={idx + 1}
+                            />
+                        ))}
                     </Accordion>
                 </div>
             </div>

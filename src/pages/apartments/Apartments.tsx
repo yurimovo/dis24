@@ -3,7 +3,6 @@ import React from 'react';
 import { Apartment } from '../../types/apartments';
 
 import ApartmentRow from "./apartment-row/ApartmentRow";
-import NewApartment from "./new-apartment/NewApartment";
 
 import "./style.scss";
 
@@ -48,6 +47,7 @@ const Apartments = () => {
                         <ApartmentRow
                             apartment={apartment}
                             idx={idx+1}
+                            key={idx}
                         />
                     ))
                 }

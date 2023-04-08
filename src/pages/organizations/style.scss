@@ -1,0 +1,24 @@
+
+
+.organizationsContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff5f2;
+  height: 100vh;
+}
+
+.organizationsHeader {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-family: 'Roboto', serif;
+  font-weight: 500;
+  font-size: 32px;
+  color: #b5533e;
+  background-color: #fff5f2;
+}
+
+.itemHeader {
+  background-color: #b5533e;
+}

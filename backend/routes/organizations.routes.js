@@ -1,20 +1,17 @@
 const { Router } = require('express');
+const { PrismaClient } = require('@prisma/client');
 
 const router = new Router();
+const prisma = new PrismaClient();
 
-router.post('/organizations_list', async (req, res) => {
+router.get('/organizations_list', async (req, res) => {
     try {
-        const organizationsList = await prisma.organizations.findMany({
-            orderBy: {
-                organization_name: 'asc'
-            }
-        });
-        res.json(Array(organizationsList));
-        res.status(201).json({ message: 'Список организаций получен' });
+        const organizationsList = await prisma.organizations.findMany();
+        console.log(organizationsList);
+        res.json(organizationsList);
     } catch (error) {
         res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' });
     }
-    
 });
 
 module.exports = router;

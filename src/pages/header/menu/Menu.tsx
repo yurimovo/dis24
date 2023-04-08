@@ -11,7 +11,7 @@ const MenuBar = () => {
                     <a href='#'><Link to="/">Главная</Link></a>
                 </li>
                 <li>
-                    <a href='#'><Link to="/facilities">Объекты</Link></a>
+                    <a href='#'><Link to="/organizations">Организации</Link></a>
                 </li>
                 <li>
                     <a href='#'><Link to="/apartments">Квартиры</Link></a>
