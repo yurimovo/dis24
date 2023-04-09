@@ -13,9 +13,13 @@
 }
 
 .rowElement {
-    font-family: 'Roboto';
+    font-family: 'Roboto', serif;
     font-weight: 400;
     font-size: 16px;
+    color: #000;
+    @media (max-width: 1440px) {
+        font-size: 12px;
+    }
 }
 
 .actions {

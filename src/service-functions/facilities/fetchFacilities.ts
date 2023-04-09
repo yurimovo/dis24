@@ -1,11 +1,14 @@
-import axios from "axios";
+import { FacilityInList } from "../../types/facilities";
 
-export const fetchFacilities = () => {
+export const fetchFacilities = async () => {
 	try {
-		axios.get('/api/facilities/facility_list')
-			.then(res => {
-				return res
-			})
+		const r = await fetch(`/api/facilities/facility_list`, {
+			method: "GET",
+			mode: "cors",
+			credentials: "include",
+		});
+		const data = await r.json();
+		return data as Array<FacilityInList>;
 	} catch (e) {
 		throw e;
 	}

@@ -29,16 +29,18 @@ model apartments {
   pult_number_id       Int?
   sim_id               Int?
   assortment           String?               @db.VarChar(20)
+  owner_id             Int?
   apartment_categories apartment_categories? @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_apartments_apartment_categories")
   hardware             hardware?             @relation(fields: [hardware_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_apartments_hardware")
+  owners               owners?               @relation(fields: [owner_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_apartments_owners")
   pult_numbers         pult_numbers?         @relation(fields: [pult_number_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_apartments_pult_numbers")
   security_types       security_types?       @relation(fields: [security_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_apartments_security_types")
   sim_cards            sim_cards?            @relation(fields: [sim_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_apartments_sim_cards")
   spi                  spi?                  @relation(fields: [spi_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_apartments_spi")
-  owners               owners[]
 
   @@index([category_id], map: "FK_apartments_apartment_categories")
   @@index([hardware_id], map: "FK_apartments_hardware")
+  @@index([owner_id], map: "FK_apartments_owners")
   @@index([pult_number_id], map: "FK_apartments_pult_numbers")
   @@index([security_type_id], map: "FK_apartments_security_types")
   @@index([sim_id], map: "FK_apartments_sim_cards")
@@ -74,21 +76,23 @@ model facilities {
   responsible                                                            String?                 @db.VarChar(20)
   assortment                                                             String?                 @db.VarChar(20)
   security_hours                                                         String?                 @db.VarChar(100)
+  organization_id                                                        Int?
   external_organizations_facilities_mount_org_idToexternal_organizations external_organizations? @relation("facilities_mount_org_idToexternal_organizations", fields: [mount_org_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_external_organizations")
   external_organizations_facilities_surv_org_idToexternal_organizations  external_organizations? @relation("facilities_surv_org_idToexternal_organizations", fields: [surv_org_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_external_organizations_2")
   facility_categories                                                    facility_categories?    @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_facility_categories")
   hardware                                                               hardware?               @relation(fields: [hardware_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_hardware")
+  organizations                                                          organizations?          @relation(fields: [organization_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_organizations")
   ownership_types                                                        ownership_types?        @relation(fields: [ownership_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_ownership_type")
   pult_numbers                                                           pult_numbers?           @relation(fields: [pult_number_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_pult_numbers")
   security_types                                                         security_types?         @relation(fields: [security_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_security_types")
   sim_cards                                                              sim_cards?              @relation(fields: [sim_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_sim_cards")
   spi                                                                    spi?                    @relation(fields: [spi_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_facilities_spi")
-  organizations                                                          organizations[]
 
   @@index([mount_org_id], map: "FK_facilities_external_organizations")
   @@index([surv_org_id], map: "FK_facilities_external_organizations_2")
   @@index([category_id], map: "FK_facilities_facility_categories")
   @@index([hardware_id], map: "FK_facilities_hardware")
+  @@index([organization_id], map: "FK_facilities_organizations")
   @@index([ownership_id], map: "FK_facilities_ownership_type")
   @@index([pult_number_id], map: "FK_facilities_pult_numbers")
   @@index([security_type_id], map: "FK_facilities_security_types")
@@ -105,36 +109,29 @@ model facility_categories {
 model hardware {
   id            Int          @id @unique(map: "Индекс 2") @default(autoincrement())
   hardware_name String?      @db.VarChar(30)
-  serial_number String?      @db.VarChar(20)
   apartments    apartments[]
   facilities    facilities[]
 }
 
 model organizations {
-  id                Int         @id @unique(map: "Индекс 2") @default(autoincrement())
-  organization_name String?     @db.VarChar(75)
-  legal_address     String?     @db.VarChar(75)
-  inn               String?     @db.VarChar(10)
-  ogrn              String?     @db.VarChar(13)
-  facility_id       Int?
-  facilities        facilities? @relation(fields: [facility_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_organizations_facilities")
-
-  @@index([facility_id], map: "FK_organizations_facilities")
+  id                Int          @id @unique(map: "Индекс 2") @default(autoincrement())
+  organization_name String?      @db.VarChar(75)
+  legal_address     String?      @db.VarChar(75)
+  inn               String?      @db.VarChar(10)
+  ogrn              String?      @db.VarChar(13)
+  facilities        facilities[]
 }
 
 model owners {
-  id                    Int         @id @unique(map: "Индекс 2") @default(autoincrement())
-  owner                 String?     @db.VarChar(100)
-  legal_address         String?     @db.VarChar(100)
-  inn                   String?     @db.VarChar(12)
-  passport_series       String?     @db.VarChar(5)
-  passport_number       String?     @db.VarChar(6)
-  passport_organization String?     @db.VarChar(100)
-  passport_date         DateTime?   @db.Date
-  apartment_id          Int?
-  apartments            apartments? @relation(fields: [apartment_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_owners_apartments")
-
-  @@index([apartment_id], map: "FK_owners_apartments")
+  id                    Int          @id @unique(map: "Индекс 2") @default(autoincrement())
+  owner                 String?      @db.VarChar(100)
+  legal_address         String?      @db.VarChar(100)
+  inn                   String?      @db.VarChar(12)
+  passport_series       String?      @db.VarChar(5)
+  passport_number       String?      @db.VarChar(6)
+  passport_organization String?      @db.VarChar(100)
+  passport_date         DateTime?    @db.Date
+  apartments            apartments[]
 }
 
 model ownership_types {
@@ -177,7 +174,7 @@ model sim_cards {
 
 model spi {
   id         Int          @id @unique(map: "Индекс 2") @default(autoincrement())
-  spi_name   String?      @db.VarChar(20)
+  spi_name   String?      @db.VarChar(30)
   apartments apartments[]
   facilities facilities[]
 }

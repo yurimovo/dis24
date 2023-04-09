@@ -18,7 +18,7 @@
 }
 
 .tableHeader {
-    background-color: #fad3ca;
+    background-color: #b5533e;
     display: flex;
     padding: 10px;
     border-top-left-radius: 4px;
@@ -26,21 +26,31 @@
 }
 
 .headerItem {
-    font-family: 'Roboto';
+    font-family: 'Roboto', serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px;
+    color: #fff;
+    @media (max-width: 1440px) and (min-width: 1320px) {
+        font-size: 10px;
+    }
 }
 
-.btnApartmentAdd {
-    height: 30px;
+.buttonRow {
     margin-top: 20px;
-    border-radius: 4px;
-    border: none;
+}
+
+.modalHeader {
     background-color: #b5533e;
-    color: #fff5f2;
-    :hover {
-        background-color: #fad3ca;
-        color: #fff;
-        cursor: pointer;
-    }
+}
+
+.modalBody {
+    background-color: #fad3ca;
+}
+
+.modalFooter {
+    background-color: #b5533e;
+}
+
+.textField {
+    margin-bottom: 5px;
 }

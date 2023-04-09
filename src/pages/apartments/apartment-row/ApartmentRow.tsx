@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { Apartment } from '../../../types/apartments';
+import { ApartmentInList } from '../../../types/apartments';
 
 import './style.scss';
 
 import EditIcon from '../../../assetts/edit.png';
 import DeleteIcon from '../../../assetts/delete.png';
 
-interface IApartment {
-    apartment: Apartment;
+interface IApartmentRow {
+    apartment: ApartmentInList;
     idx: number;
-};
+}
 
-const ApartmentRow: React.FC<IApartment> = ({apartment, idx}) => {
+const ApartmentRow: React.FC<IApartmentRow> = ({apartment, idx}) => {
     return (
         <div className='container apartmentRowContainer'>
             <div className='row apartmentRow'>
@@ -20,13 +20,13 @@ const ApartmentRow: React.FC<IApartment> = ({apartment, idx}) => {
                     {idx}
                 </div>
                 <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 rowElement'>
-                    {apartment.owner}
+                    {apartment.owners.owner}
                 </div>
                 <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 rowElement'>
-                    {apartment.address}
+                    {apartment.apartment_address}
                 </div>
                 <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 rowElement'>
-                    {apartment.phoneNumber}
+                    {apartment.contract_numbers}
                 </div>
                 <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2 rowElement actions'>
                     <img src={EditIcon} alt='Edit Icon' />

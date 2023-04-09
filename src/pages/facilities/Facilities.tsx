@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
-import { Facility } from '../../types/facilities';
+import {FacilityInList} from '../../types/facilities';
 
 import FacilityRow from "./facility-row/FacilityRow";
 
 import "./style.scss";
+import {fetchFacilities} from "../../service-functions/facilities/fetchFacilities";
 
-interface IFacilities {
-    facilities: Array<Facility>;
-}
-
-const Facilities: React.FC<IFacilities> = ({ facilities }) => {
+const Facilities = () => {
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const [facilities, setFacilities] = useState<Array<FacilityInList>>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
 
     const handleToggleModal = () => setShowModal(!showModal);
@@ -25,21 +24,30 @@ const Facilities: React.FC<IFacilities> = ({ facilities }) => {
         setShowModal(false);
     };
 
+    useEffect(() => {
+        setLoading(true);
+        fetchFacilities().then((response) => {
+            setFacilities(response);
+        }).catch(error => {
+            console.error(error);
+        });
+    },[]);
+
     return (
         <div className='container facilities'>
             <div className='row pageHeader'>
                 Дислокация объектов
             </div>
             <div className='row tableHeader'>
-                <div className='col-xxl-1 col-xl-1 col-lg-1 col-md-1 headerItem'>№ п/п</div>
-                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 headerItem'>Организация</div>
-                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 headerItem'>Объект</div>
-                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3 headerItem'>Адрес</div>
-                <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2 headerItem'>Действия</div>
+                <div className='col-xxl-1 col-xl-1 col-lg-1 col-md-1'>№ п/п</div>
+                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Организация</div>
+                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Объект</div>
+                <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Адрес</div>
+                <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2'>Действия</div>
             </div>
             <div className='row'>
                 {
-                    (facilities || []).map((facility: Facility, idx) => (
+                    (facilities || []).map((facility: FacilityInList, idx) => (
                         <FacilityRow
                             facility={facility}
                             idx={idx+1}

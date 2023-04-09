@@ -3,11 +3,14 @@ ul {
 }
 
 li a {
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    font-size: 14px;
     text-decoration: none;
     outline: none;
     background-color: #b8783d;
-    padding: 5px;
-    margin: 10px;
+    padding: 3px;
+    margin: 3px;
     color: #fff;
     border-radius: 4px;
     :hover {

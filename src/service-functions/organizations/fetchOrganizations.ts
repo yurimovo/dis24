@@ -1,18 +1,4 @@
-/*
-import axios from "axios";
-
-export const fetchOrganizations = async () => {
-	try {
-        axios.get('/api/organizations/organizations_list')
-            .then(res => {
-                return res.data
-            })
-	} catch (e) {
-		throw e;
-	}
-};*/
-
-import {Organization} from "../../types/organizations";
+import {OrganizationInList} from "../../types/organizations";
 
 export const fetchOrganizations = async () => {
 	try {
@@ -21,9 +7,8 @@ export const fetchOrganizations = async () => {
 			mode: "cors",
 			credentials: "include",
 		});
-		console.log('r', r);
 		const data = await r.json();
-		return data as Array<Organization>;
+		return data as Array<OrganizationInList>;
 	} catch (e) {
 		throw e;
 	}

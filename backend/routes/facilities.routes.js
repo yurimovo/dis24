@@ -1,13 +1,24 @@
 const Router = require('express');
+const { PrismaClient } = require('@prisma/client');
 
 const router = Router();
+const prisma = new PrismaClient();
 
 router.get('/facility_list', async (req, res) => {
-    const { organizationId } = req.body;
-    const facilityList = await prisma.organizations.findUnique({
-        where: { id: organizationId }
-    }).facilities()
+    const facilityList = await prisma.facilities.findMany({
+        select: {
+            facility_name: true,
+            facility_address: true,
+            organizations: {
+              select: {
+                organization_name: true,
+              },
+            },
+        },
+        orderBy: {facility_name: 'asc'}
+    });
     res.json(facilityList);
+    console.log(facilityList);
 });
 
 router.post('/facility_add', async (req, res) => {

@@ -7,7 +7,6 @@ export const createFacility = async (data: Facility) => {
             method: 'POST',
             body: facilityData
         });
-        console.log(data);
     } catch (error) {
         throw error;
     }

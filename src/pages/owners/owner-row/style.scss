@@ -1,11 +1,11 @@
-.organizationRowContainer {
+.ownerRowContainer {
   background-color: #fff5f2;
   :hover {
     background-color: #fad3ca;
   }
 }
 
-.organizationRow {
+.ownerRow {
   display: flex;
   flex-direction: row;
   padding: 10px;
@@ -17,6 +17,9 @@
   font-weight: 400;
   font-size: 16px;
   color: #000;
+  @media (max-width: 1440px) {
+    font-size: 12px;
+  }
 }
 
 .actions {

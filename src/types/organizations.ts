@@ -1,10 +1,12 @@
-import { Facility } from "./facilities";
-
 export type Organization = {
-    uid: number,
-    organizationName: string,
-    legalAddress: string,
+    organization_name: string,
+    legal_address: string,
     inn: string,
-    orgn: string,
-    facilities: Array<Facility>
+    ogrn: string
+};
+
+export type OrganizationInList = {
+    organization_name: string,
+    legal_address: string,
+    inn: string,
 };
