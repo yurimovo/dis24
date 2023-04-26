@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import {SubmitHandler, useForm} from "react-hook-form";
 import { Organization, OrganizationInList } from '../../types/organizations';
 
@@ -13,8 +13,14 @@ const Organizations = () => {
   const [organizations, setOrganizations] = useState<Array<OrganizationInList>>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [organizationData, setOrganizationData] = useState<Organization>({
+    organization_name: '',
+    legal_address: '',
+    inn: '',
+    ogrn: ''
+  });
 
-  const {
+  /* const {
     register,
     formState: {
       errors,
@@ -30,29 +36,28 @@ const Organizations = () => {
       inn: '',
       ogrn: ''
     }
-  });
+  }); */
 
-  const handleToggleModal = () => setShowModal(!showModal);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOrganizationData({...organizationData, [event.target.name]: event.target.value });
+  };
 
-  const onSubmit: SubmitHandler<Organization> = (data) => {
+  const handleSaveOrganization = () => {
     setLoading(true);
     createOrganization({
-      organization_name: data.organization_name,
-      legal_address: data.legal_address,
-      inn: data.inn,
-      ogrn: data.inn
+      organization_name: organizationData.organization_name,
+      legal_address: organizationData.legal_address,
+      inn: organizationData.inn,
+      ogrn: organizationData.ogrn
     })
       .then(() => {
-        handleGetOrganizations();
         setLoading(false);
+        fetchOrganizations();
       })
-      .catch(error => console.error(error));
-    reset();
+      .catch((error) => console.error(error));
   };
 
-  const handleFacilityCancel = () => {
-    setShowModal(false);
-  };
+  const handleToggleModal = () => setShowModal(!showModal);
 
   const handleGetOrganizations = () => {
     setLoading(true);
@@ -68,111 +73,87 @@ const Organizations = () => {
 
   useEffect(() => {
     handleGetOrganizations();
-  },[organizations]);
+  },[]);
 
   return (
-      <div className='container organizationsContainer'>
-          <div className='row pageHeader'>
-            Список организаций
-          </div>
-          <div className='row tableHeader'>
-            <div className='col-xxl-1 col-xl-1 col-lg-1 col-md-1'>№ п/п</div>
-            <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Организация</div>
-            <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Объект</div>
-            <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Адрес</div>
-            <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2'>Действия</div>
-          </div>
-        <div className='row'>
-          {
-            (organizations || []).map((organization: OrganizationInList, idx) => (
-              <OrganizationRow
-                organization={organization}
-                key={idx}
-                idx={idx+1}
-              />
-            ))
-          }
+    <div className='container organizationsContainer'>
+        <div className='row pageHeader'>
+          Список организаций
         </div>
-        <div className='row'>
-          <div className='col-xl-12 col-lg-12-col-md-12'>
-            <Button variant='success' onClick={handleToggleModal} style={{marginTop: '20px'}}>
-              Добавить
-            </Button>
-          </div>
+        <div className='row tableHeader'>
+          <div className='col-xxl-1 col-xl-1 col-lg-1 col-md-1'>№ п/п</div>
+          <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Организация</div>
+          <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Объект</div>
+          <div className='col-xxl-3 col-xl-3 col-lg-3 col-md-3'>Адрес</div>
+          <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2'>Действия</div>
         </div>
-        <Modal show={showModal} onHide={handleToggleModal} centered size='sm'>
-          <Modal.Header className='modalHeader' closeButton>
-            <Modal.Title className='modalTitle'>Новая организация</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className='modalBody'>
-            <div className='container'>
-              <div className='row justify-content-start align-items-start'>
-                <div className='col-xxl-12 col-xl-12 col-lg-12 col-md-12'>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <input
-                      placeholder='Наименование организации'
-                      {...register('organization_name', {
-                        required: 'Обязательное поле',
-                      })}
-                    />
-                    {
-                      <div style={{ height: 30 }}>
-                        {errors?.organization_name && <p style={{ color: 'red' }}>{errors.organization_name.message}</p>}
-                      </div>
-                    }
-                    <input
-                      placeholder='Юридический адрес'
-                      {...register('legal_address', {
-                        required: 'Обязательное поле'
-                      })}
-                    />
-                    {
-                      <div style={{ height: 30 }}>
-                        {errors?.legal_address && <p style={{ color: 'red' }}>{errors.legal_address.message}</p>}
-                      </div>
-                    }
-                    <input
-                      placeholder='ИНН'
-                      {...register('inn', {
-                        required: 'Обязательное поле',
-                        maxLength: 10,
-                        minLength: 10,
-                        pattern: {
-                          value: /^\d+$/,
-                          message: 'Допускаются только цифры'
-                        }
-                      })}
-                    />
-                    {
-                      <div style={{ height: 30 }}>
-                        {errors?.inn && <p style={{ color: 'red' }}>{errors.inn.message}</p>}
-                      </div>
-                    }
-                    <input
-                      placeholder='ОГРН'
-                      {...register('ogrn', {
-                        required: 'Обязательное поле',
-                        maxLength: 13,
-                        minLength: 13,
-                        pattern: {
-                          value: /^\d+$/,
-                          message: 'Допускаются только цифры'
-                        }
-                      })}
-                    />
-                    {
-                      <div style={{ height: 30 }}>
-                        {errors?.ogrn && <p style={{ color: 'red' }}>{errors.ogrn.message}</p>}
-                      </div>
-                    }
-                    <input className='saveButton' type='submit' value='Сохранить' />
-                  </form>
-                </div>
+      <div className='row'>
+        {
+          (organizations || []).map((organization: OrganizationInList, idx) => (
+            <OrganizationRow
+              organization={organization}
+              key={idx}
+              idx={idx+1}
+            />
+          ))
+        }
+      </div>
+      <div className='row'>
+        <div className='col-xl-12 col-lg-12-col-md-12'>
+          <Button variant='success' onClick={handleToggleModal} style={{marginTop: '20px'}}>
+            Добавить
+          </Button>
+        </div>
+      </div>
+      <Modal show={showModal} onHide={handleToggleModal} centered size='sm'>
+        <Modal.Header className='modalHeader' closeButton>
+          <Modal.Title className='modalTitle'>Новая организация</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='modalBody'>
+          <div className='container'>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-12 col-xl-12 col-lg-12 col-md-12'>
+                <form>
+                  <input
+                    className='modalInput'
+                    type='text'
+                    placeholder='Организация'
+                    name='organization_name'
+                    value={organizationData.organization_name}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className='modalInput'
+                    type='text'
+                    placeholder='Юридический адрес'
+                    name='legal_address'
+                    value={organizationData.legal_address}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className='modalInput'
+                    type='text'
+                    placeholder='ИНН'
+                    name='inn'
+                    value={organizationData.inn}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className='modalInput'
+                    type='text'
+                    placeholder='ОГРН'
+                    name='ogrn'
+                    value={organizationData.ogrn}
+                    onChange={handleChange}
+                  />
+                  <Button variant='success' onClick={handleSaveOrganization}>Сохранить</Button>
+                </form>  
               </div>
             </div>
-          </Modal.Body>
-        </Modal>
-      </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+    </div>
   )
 }
 

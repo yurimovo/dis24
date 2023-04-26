@@ -22,6 +22,8 @@ router.get('/organizations_list', async (req, res) => {
 
 router.post('/organization_add', async (req, res) => {
     try {
+        const { organization_name, legal_address, inn, ogrn } = req.body;
+        console.log('body', req.body);
         const org = await prisma.organizations.create({
             data: {
                 organization_name,
@@ -29,8 +31,10 @@ router.post('/organization_add', async (req, res) => {
                 inn,
                 ogrn
             }
-        })
+        });
+        return org;
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' });
     }
 })
