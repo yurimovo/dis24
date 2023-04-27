@@ -5,11 +5,11 @@ export const createOrganization = async (data: Organization) => {
   try {
     const r = await fetch('/api/organizations/organization_add', {
       method: 'POST',
-      mode: "cors",
-      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: organizationData
     });
-    return (await r.json());
   } catch (error) {
     throw error;
   }

@@ -32,7 +32,7 @@ router.post('/organization_add', async (req, res) => {
                 ogrn
             }
         });
-        return org;
+        res.status(200).json({ message: 'Запись добавлена' });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' });
