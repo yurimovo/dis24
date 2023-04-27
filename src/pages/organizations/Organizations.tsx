@@ -52,7 +52,12 @@ const Organizations = () => {
     })
       .then(() => {
         setLoading(false);
-        fetchOrganizations();
+        setShowModal(false);
+        fetchOrganizations()
+          .then((res) => {
+            setOrganizations(res);
+          })
+            .catch(error => {console.error(error)});
       })
       .catch((error) => console.error(error));
   };
