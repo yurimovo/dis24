@@ -1,0 +1,66 @@
+.facility-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff5f2;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fff5f2;
+
+    .facility-info__content {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        border: 1px solid #b5533e;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        .facility-info__content__header {
+            display: flex;
+            justify-content: center;
+            font-family: 'Roboto', serif;
+            font-weight: 500;
+            font-size: 32px;
+            color: #b5533e;
+        }
+        
+        .facility-info__content__facility {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 30px;
+            font-family: 'Roboto', serif;
+            font-weight: 400;
+            font-size: 24px;
+            color: #b5533e;
+            text-decoration: underline;
+        }
+        
+        .facility-info__content__row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-left: 20px;
+            height: 45px;
+        
+        
+            .facility-info__content__row__title {
+                display: flex;
+                font-family: 'Roboto', serif;
+                font-weight: 400;
+                font-size: 18px;
+                color: #6f6f6f;
+            }
+        
+            .facility-info__content__row__content {
+                display: flex;
+                padding-left: 20px;
+                font-family: 'Roboto', serif;
+                font-weight: 400;
+                font-size: 18px;
+                color: #0f0f0f;
+            }
+        }
+    }
+}
