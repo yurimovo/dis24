@@ -9,7 +9,6 @@ router.get('/facility_list', async (req, res) => {
         orderBy: {organization: 'asc'}
     });
     res.json(facilityList);
-    console.log(facilityList);
 });
 
 router.get('/facility-info/:id', async (req, res) => {
@@ -66,7 +65,7 @@ router.get('/facility-edit-info/:id', async (req, res) => {
     }
 });
 
-router.post('/facility_add', async (req, res) => {
+router.post('/facility-add', async (req, res) => {
     try {
         console.log('Тело запроса:', req.body);
         const { 

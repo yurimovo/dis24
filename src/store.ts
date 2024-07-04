@@ -5,6 +5,8 @@ class DisStore {
     selectedApartmentId = 0;
     selectedActiveFacility = 0;
     selectedEditingFacility = 0;
+    selectedActiveApartment = 0;
+    selectedEditingApartment = 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -24,6 +26,14 @@ class DisStore {
 
     changeEditingFacility = (editingFacility: number) => {
         this.selectedEditingFacility = editingFacility;
+    };
+
+    changeActiveApartment = (activeApartment: number) => {
+        this.selectedActiveApartment = activeApartment;
+    };
+
+    changeEditingApartment = (editingApartment: number) => {
+        this.selectedEditingApartment = editingApartment;
     };
 };
 

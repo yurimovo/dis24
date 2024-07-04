@@ -24,12 +24,12 @@ const Facilities = () => {
         security_type: '',
         contruct_number: '',
         contruct_date: '',
-        price: 0,
+        price: '',
         price_date: '',
         ownership_type: '',
         facility_category: '',
-        contruct_file_number: 0,
-        lettered_file_number: 0,
+        contruct_file_number: '',
+        lettered_file_number: '',
         spi: '',
         facility_hardware: '',
         surving_organization: '',
@@ -76,7 +76,7 @@ const Facilities = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setFormData({...formData, [id]: value})
-    }
+    };
 
     /* const handlePDF = () => {
         navigate('/facility-pdf');

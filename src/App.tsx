@@ -6,12 +6,13 @@ import Header from './pages/header/Header';
 import MainPage from "./pages/main-page/MainPage";
 import Facilities from "./pages/facilities/Facilities";
 import FacilityInfo from './pages/facilities/facility-info/FacilityInfo';
+import FacilityEdit from './pages/facilities/facility-edit/FacilityEdit';
 import FacilityPDF from './pages/facilities/facility-pdf/FacilityPDF';
 import Apartments from './pages/apartments/Apartments';
 import ApartmentInfo from "./pages/apartments/apartment-info/ApartmentInfo";
+import ApartmentEdit from './pages/apartments/apartment-edit/ApartmentEdit';
 import Organizations from "./pages/organizations/Organizations";
 import Owners from "./pages/owners/Owners";
-import FacilityEdit from './pages/facilities/facility-edit/FacilityEdit';
 
 import "./main-container.scss";
 
@@ -28,6 +29,7 @@ function App() {
                     <Route path={'/facility-pdf'} element={<FacilityPDF />} />
                     <Route path={'/apartments'} element={<Apartments />} />
                     <Route path={'/apartment-info/:id'} element={<ApartmentInfo />} />
+                    <Route path={'/apartment-edit/:id'} element={<ApartmentEdit />} />
                     <Route path={'/organizations'} element={<Organizations />} />
                     <Route path={'/owners'} element={<Owners />} />
                     <Route path="*" element={<MainPage />} />

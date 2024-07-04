@@ -2,7 +2,7 @@ import { ApartmentInList } from "../../types/apartments";
 
 export const fetchApartments = async () => {
   try {
-    const r = await fetch(`/api/apartments/apartments_list`, {
+    const r = await fetch(`/api/apartments/apartments-list`, {
       method: "GET",
       mode: "cors",
       credentials: "include",

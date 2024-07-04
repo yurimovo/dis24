@@ -4,7 +4,7 @@ import { FacilityInList } from '../../../types/facilities';
 import { observer } from 'mobx-react';
 import { useNavigate } from 'react-router-dom';
 import store from '../../../store';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import './style.scss';
 
@@ -12,7 +12,6 @@ import EditIcon from '../../../assetts/edit.png';
 import DeleteIcon from '../../../assetts/delete.png';
 
 import { deleteFacility } from '../../../service-functions/facilities/deleteFacility';
-import { fetchFacilities } from '../../../service-functions/facilities/fetchFacilities';
 
 interface IFacility {
     facility: FacilityInList;

@@ -1,24 +1,71 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import { Watch } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
-import { ApartmentInList } from '../../types/apartments';
+import { Apartment, ApartmentInList } from '../../types/apartments';
 
 import ApartmentRow from "./apartment-row/ApartmentRow";
 
 import "./style.scss";
 import {fetchApartments} from "../../service-functions/apartments/fetchApartments";
+import { createApartment } from '../../service-functions/apartments/createApartment';
 
 const Apartments = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [apartments, setApartments] = useState<Array<ApartmentInList>>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [formData, setFormData] = useState<Apartment>({
+    owner: '', 
+    address: '', 
+    phones: '', 
+    inn: '', 
+    contruct_number: '', 
+    contruct_date: '', 
+    price: '', 
+    price_date: '', 
+    security_type: '', 
+    contruct_file_number: '',
+    lettered_file_number: '', 
+    apartment_category: '', 
+    penal_number: '', 
+    pult_number: '', 
+    spi: '', 
+    apartment_hardware: '', 
+    mounting_organization: '',
+    surving_organization: '', 
+    assortment: ''
+  });
 
   const handleToggleModal = () => setShowModal(!showModal);
 
-  const handleApartmentSave = () => {
-    console.log('Apartment saved...');
-    setShowModal(false);
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData({...formData, [id]: value})
+  };
+
+  const handleApartmentSave = async (e: React.FormEvent) => {
+    console.log('form data', formData);
+        e.preventDefault();
+        try {
+            await createApartment(formData);
+            toast.success('МПХИГ создан', {
+                onClose: () => {
+                    fetchApartments().then((response) => {
+                        setApartments(response);
+                        setShowModal(false);
+                    }).catch(error => {
+                        console.error(error);
+                    });
+                }
+            });
+        } catch (error) {
+            toast.error('Ошибка создания МПХИГ');
+        }
   };
 
   const handleApartmentCancel = () => {
@@ -79,6 +126,7 @@ const Apartments = () => {
               apartment={apartment}
               key={idx}
               idx={idx+1}
+              reloadPage={reloadPage}
             />
           ))
         }
@@ -91,12 +139,82 @@ const Apartments = () => {
         <Modal.Body className='modalBody'>
           <div className='container'>
             <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-12 col-xl-12 col-lg-12 col-md-12'>
+                <Form.Control className='textField' type='text' placeholder='Собственник' id='owner' onChange={handleChange} value={formData.owner} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-12 col-xl-12 col-lg-12 col-md-12'>
+                <Form.Control className='textField' type='text' placeholder='Адрес' id='address' onChange={handleChange} value={formData.address} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-12 col-xl-12 col-lg-12 col-md-12'>
+                <Form.Control className='textField' type='text' placeholder='Телефоны' id='phones' onChange={handleChange} value={formData.phones} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
               <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
-                <Form.Control className='textField' type='text' placeholder='Собственник' id='owner' />
-                <Form.Control className='textField' type='text' placeholder='Адрес' id='address' />
+                <Form.Control className='textField' type='text' placeholder='№ договора' id='contruct_number' onChange={handleChange} value={formData.contruct_number} />
               </div>
               <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
-                <Form.Control className='textField' type='text' placeholder='№ договора' id='contract_numbers' />
+                <Form.Control className='textField' type='text' placeholder='Дата договора' id='contruct_date' onChange={handleChange} value={formData.contruct_date} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Тариф в месяц' id='price' onChange={handleChange} value={formData.price} />
+              </div>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Дата тарифа' id='price_date' onChange={handleChange} value={formData.price_date} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Вид охраны' id='security_type' onChange={handleChange} value={formData.security_type} />
+              </div>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='№ договорного дела' id='contruct_file_number' onChange={handleChange} value={formData.contruct_file_number} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='№ литерного дела' id='lettered_file_number' onChange={handleChange} value={formData.lettered_file_number} />
+              </div>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Категория МПХИГ' id='apartment_category' onChange={handleChange} value={formData.apartment_category} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='№ пенала' id='penal_number' onChange={handleChange} value={formData.penal_number} />
+              </div>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Пультовый номер' id='pult_number' onChange={handleChange} value={formData.pult_number} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='СПИ' id='spi' onChange={handleChange} value={formData.spi} />
+              </div>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Оборудование' id='apartment_hardware' onChange={handleChange} value={formData.apartment_hardware} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Монтажная организация' id='mounting_organization' onChange={handleChange} value={formData.mounting_organization} />
+              </div>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Обслуживающая организация' id='surving_organization' onChange={handleChange} value={formData.surving_organization} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Подбор' id='assortment' onChange={handleChange} value={formData.assortment} />
+              </div>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='ИНН' id='inn' onChange={handleChange} value={formData.inn} />
               </div>
             </div>
           </div>

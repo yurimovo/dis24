@@ -25,12 +25,12 @@ const FacilityEdit = observer(() => {
         security_type: '',
         contruct_number: '',
         contruct_date: '',
-        price: 0,
+        price: '',
         price_date: '',
         ownership_type: '',
         facility_category: '',
-        contruct_file_number: 0,
-        lettered_file_number: 0,
+        contruct_file_number: '',
+        lettered_file_number: '',
         spi: '',
         facility_hardware: '',
         surving_organization: '',
@@ -38,7 +38,7 @@ const FacilityEdit = observer(() => {
         pult_number: '',
         sim_number: '',
         responsible: '',
-        assortment: '',
+        assortment: '', 
         security_hours: ''
     });
     const [isLoading, setLoading] = useState<boolean>(false);

@@ -1,4 +1,4 @@
-.facility-edit {
+.apartment-edit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
     padding: 10px;
     background-color: #fff5f2;
 
-    .facility-edit__content {
+    .apartment-edit__content {
         display: flex;
         flex-direction: column;
         width: 70%;
@@ -17,7 +17,7 @@
         margin-top: 20px;
         margin-bottom: 20px;
 
-        .facility-edit__content__header {
+        .apartment-edit__content__header {
             display: flex;
             justify-content: center;
             font-family: 'Roboto', serif;
@@ -26,7 +26,7 @@
             color: #b5533e;
         }
         
-        .facility-edit__content__facility {
+        .apartment-edit__content__apartment{
             display: flex;
             justify-content: center;
             padding-bottom: 30px;
@@ -37,7 +37,7 @@
             text-decoration: underline;
         }
         
-        .facility-edit_content__row {
+        .apartment-edit_content__row {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -45,7 +45,7 @@
             height: 45px;
         
         
-            .facility-edit__content__row__title {
+            .apartment-edit__content__row__title {
                 display: flex;
                 font-family: 'Roboto', serif;
                 font-weight: 400;
@@ -53,7 +53,7 @@
                 color: #6f6f6f;
             }
         
-            .facility-edit__content__row__content {
+            .apartment-edit__content__row__content {
                 display: flex;
                 padding-left: 20px;
                 font-family: 'Roboto', serif;
@@ -64,7 +64,7 @@
         }
     }
 
-    .facility-edit__buttons {
+    .apartment-edit__buttons {
         display: flex;
         justify-content: center;
         align-items: center;

@@ -12,13 +12,13 @@ import { Apartment } from "../../../types/apartments";
 
 const ApartmentInfo = observer(() => {
     const { id } = useParams();
-    const { selectedApartmentId } = store;
+    const { selectedActiveApartment } = store;
     const [selectedApartment, setSelectedApartment] = useState<Apartment>();
     const [isLoading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         setLoading(true);
-        fetchApartmentById(selectedApartmentId)
+        fetchApartmentById(selectedActiveApartment)
         .then((result) => {
             setSelectedApartment(result);
             setLoading(false);
@@ -28,13 +28,6 @@ const ApartmentInfo = observer(() => {
             setLoading(false);
         });
     }, [id]);
-
-    const formatDate = (date: Date | undefined) => {
-        if (!date) {
-            return 'Дата не указана';
-        }
-        return format(date, 'dd.MM.yyyy');
-    };
 
     return (
         <div className="apartment-info">
@@ -62,7 +55,7 @@ const ApartmentInfo = observer(() => {
                     </div>
                     <div className="apartment-info__content__row">
                         <div className="apartment-info__content__row__title">Дата договора:</div>
-                        <div className="apartment-info__content__row__content">{ formatDate(selectedApartment?.contruct_date) }</div>
+                        <div className="apartment-info__content__row__content">{ selectedApartment?.contruct_date }</div>
                     </div>
                 </div>
             }
