@@ -9,24 +9,24 @@ datasource db {
 
 model apartments {
   apartment_id          Int     @id @unique(map: "Индекс 1") @default(autoincrement())
-  address               String? @db.VarChar(150)
   owner                 String? @db.VarChar(150)
-  security_type         String? @db.VarChar(50)
+  address               String? @db.VarChar(150)
   phones                String? @db.VarChar(50)
+  inn                   String? @db.VarChar(50)
   contruct_number       String? @db.VarChar(50)
   contruct_date         String? @db.VarChar(10)
+  price                 String? @db.VarChar(50)
+  price_date            String? @db.VarChar(10)
+  security_type         String? @db.VarChar(50)
   contruct_file_number  String? @db.VarChar(50)
   lettered_file_number  String? @db.VarChar(50)
+  apartment_category    String? @db.VarChar(50)
   penal_number          String? @db.VarChar(50)
   pult_number           String? @db.VarChar(50)
-  price                 String? @db.VarChar(50)
-  apartment_category    String? @db.VarChar(50)
-  surving_organization  String? @db.VarChar(50)
-  price_date            String? @db.VarChar(10)
-  mounting_organization String? @db.VarChar(50)
   spi                   String? @db.VarChar(50)
   apartment_hardware    String? @db.VarChar(50)
-  inn                   String? @db.VarChar(50)
+  mounting_organization String? @db.VarChar(50)
+  surving_organization  String? @db.VarChar(50)
   assortment            String? @db.VarChar(50)
 }
 
@@ -144,13 +144,13 @@ model ls {
 }
 
 model sim {
-  id            Int       @id @unique(map: "Индекс 1") @default(autoincrement())
-  fccid         String?   @db.VarChar(18)
-  sim_number    String?   @db.VarChar(50)
-  pult_number   String?   @db.VarChar(50)
-  mounting_date DateTime? @db.Date
-  place         String?   @db.VarChar(150)
-  address       String?   @db.VarChar(150)
+  sim_id        Int     @id @unique(map: "Индекс 2") @default(autoincrement())
+  sim_number    String? @db.VarChar(10)
+  fccid         String? @db.VarChar(18)
+  object        String? @db.VarChar(150)
+  address       String? @db.VarChar(150)
+  pult_number   String? @db.VarChar(10)
+  mounting_date String? @db.VarChar(50)
 }
 
 model taken_facilities {

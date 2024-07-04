@@ -13,6 +13,7 @@ import ApartmentInfo from "./pages/apartments/apartment-info/ApartmentInfo";
 import ApartmentEdit from './pages/apartments/apartment-edit/ApartmentEdit';
 import Organizations from "./pages/organizations/Organizations";
 import Owners from "./pages/owners/Owners";
+import Simcards from './pages/sim-cards/Simcards';
 
 import "./main-container.scss";
 
@@ -32,6 +33,7 @@ function App() {
                     <Route path={'/apartment-edit/:id'} element={<ApartmentEdit />} />
                     <Route path={'/organizations'} element={<Organizations />} />
                     <Route path={'/owners'} element={<Owners />} />
+                    <Route path={'/simcards'} element={<Simcards />} />
                     <Route path="*" element={<MainPage />} />
                 </Routes>
                 <ToastContainer 
