@@ -6,8 +6,10 @@ import {fetchOwners} from "../../service-functions/owners/fetchOwners";
 
 import "./style.scss";
 
+import Construct from '../../assetts/construction.png';
+
 const Owners = () => {
-  const [owners, setOwners] = useState<Array<OwnersInList>>([]);
+  /* const [owners, setOwners] = useState<Array<OwnersInList>>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -33,11 +35,19 @@ const Owners = () => {
         console.error(error);
         setLoading(false);
       });
-  },[]);
+  },[]); */
 
   return (
     <div className='container ownersContainer'>
-      <div className='row pageHeader'>
+      <img src={Construct} alt='Construction' style={{
+        width: '40%', 
+        height: 'auto', 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginTop: '100px'
+        }} 
+      />
+      {/* <div className='row pageHeader'>
         Список собственников
       </div>
       <div className='row tableHeader'>
@@ -84,7 +94,7 @@ const Owners = () => {
             Сохранить
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

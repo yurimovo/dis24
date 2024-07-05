@@ -11,7 +11,7 @@ import './style.scss';
 import EditIcon from '../../../assetts/edit.png';
 import DeleteIcon from '../../../assetts/delete.png';
 
-//import { deleteFacility } from '../../../service-functions/facilities/deleteFacility';
+import { deleteSim } from '../../../service-functions/simcards/deleteSim';
 
 interface ISimcard {
     simcard: SimcardInList;
@@ -23,18 +23,18 @@ const SimRow: React.FC<ISimcard> = observer (({ simcard, idx, reloadPage }) => {
     const { changeActiveSim, changeEditingSim } = store;
     const navigate = useNavigate();
 
-    /* const changeId = () => {
+    const changeId = () => {
         changeActiveSim(simcard.sim_id);
         navigate(`/simcard-info/${simcard.sim_id}`);
-    } */
+    }
 
-    /* const handleEditClick = (e: React.MouseEvent) => {
+    const handleEditClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         changeEditingSim(simcard.sim_id);
         navigate(`/simcard-edit/${simcard.sim_id}`);
-    }; */
+    };
 
-    /* const deleteSimWithConfirmation = async (id: number) => {
+    const deleteSimWithConfirmation = async (id: number) => {
         const userConfirmed = window.confirm("Вы уверены, что хотите удалить SIM-карту?");
         if (userConfirmed) {
             try {
@@ -52,9 +52,9 @@ const SimRow: React.FC<ISimcard> = observer (({ simcard, idx, reloadPage }) => {
         } else {
             toast.info('Удаление отменено');
         }
-    }; */
+    };
 
-    /* const handleDeleteClick = async (e: React.MouseEvent, id: number) => {
+    const handleDeleteClick = async (e: React.MouseEvent, id: number) => {
         e.stopPropagation();
         try {
             await deleteSimWithConfirmation(id);
@@ -62,10 +62,10 @@ const SimRow: React.FC<ISimcard> = observer (({ simcard, idx, reloadPage }) => {
             console.error('Ошибка при удалении SIM-карты:', error);
             toast.error(`Ошибка удаления SIM-карты ${simcard.sim_number}`);
         }
-    }; */
+    };
 
     return (
-        <div className='container simRowContainer' /* onClick={changeId} */>
+        <div className='container simRowContainer' onClick={changeId}>
             <div className='row simRow'>
                 <div className='col-xxl-1 col-xl-1 col-lg-1 col-md-1 rowElement'>
                     {idx}
@@ -80,8 +80,8 @@ const SimRow: React.FC<ISimcard> = observer (({ simcard, idx, reloadPage }) => {
                     {simcard.object}
                 </div>
                 <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2 rowElement actions'>
-                    <img src={EditIcon} alt='Edit Icon' /* onClick={handleEditClick} */ />
-                    <img src={DeleteIcon} alt='Delete Icon' /* onClick={(e) => handleDeleteClick(e, simcard.sim_id)} */ />
+                    <img src={EditIcon} alt='Edit Icon' onClick={handleEditClick} />
+                    <img src={DeleteIcon} alt='Delete Icon' onClick={(e) => handleDeleteClick(e, simcard.sim_id)} />
                 </div>
             </div>
         </div>

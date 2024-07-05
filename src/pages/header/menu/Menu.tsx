@@ -22,6 +22,9 @@ const MenuBar = () => {
                 <li>
                     <a href='#'><Link to="/apartments">МХИГ</Link></a>
                 </li>
+                <li>
+                    <a href="#"><Link to="/simcards">SIM-карты</Link></a>
+                </li>
             </ul>
         </nav>
     );

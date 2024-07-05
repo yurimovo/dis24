@@ -9,8 +9,10 @@ import { createOrganization } from "../../service-functions/organizations/create
 
 import './style.scss';
 
+import Construct from '../../assetts/construction.png';
+
 const Organizations = () => {
-  const [organizations, setOrganizations] = useState<Array<OrganizationInList>>([]);
+  /* const [organizations, setOrganizations] = useState<Array<OrganizationInList>>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [organizationData, setOrganizationData] = useState<Organization>({
@@ -18,7 +20,7 @@ const Organizations = () => {
     legal_address: '',
     inn: '',
     ogrn: ''
-  });
+  }); */
 
   /* const {
     register,
@@ -38,7 +40,7 @@ const Organizations = () => {
     }
   }); */
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  /* const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrganizationData({...organizationData, [event.target.name]: event.target.value });
   };
 
@@ -78,11 +80,19 @@ const Organizations = () => {
 
   useEffect(() => {
     handleGetOrganizations();
-  },[]);
+  },[]); */
 
   return (
     <div className='container organizationsContainer'>
-        <div className='row pageHeader'>
+      <img src={Construct} alt='Construction' style={{
+        width: '40%', 
+        height: 'auto', 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginTop: '100px'
+        }}
+      />
+        {/* <div className='row pageHeader'>
           Список организаций
         </div>
         <div className='row tableHeader'>
@@ -157,7 +167,7 @@ const Organizations = () => {
             </div>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }

@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 const router = Router();
 const prisma = new PrismaClient();
 
-router.get('/facility_list', async (req, res) => {
+router.get('/facility-list', async (req, res) => {
     const facilityList = await prisma.facilities.findMany({
         orderBy: {organization: 'asc'}
     });
@@ -91,10 +91,10 @@ router.post('/facility-add', async (req, res) => {
             facility: facilityCandidate
         });
     } catch (error) {
-        console.error('Ошибка при создании объекта:', error); // Логирование ошибки на сервере
+        console.error('Ошибка при создании объекта:', error);
         res.status(500).json({ 
             message: 'Что-то пошло не так, попробуйте снова',
-            error: error.message // Отправка сообщения об ошибке клиенту
+            error: error.message
         });
     }
 });
@@ -184,10 +184,10 @@ router.delete('/facility-delete/:id', async (req, res) => {
             facility: deletedFacility
         });
     } catch (error) {
-        console.error('Ошибка при удалении записи:', error); // Логирование ошибки на сервере
+        console.error('Ошибка при удалении записи:', error);
         res.status(500).json({
             message: 'Что-то пошло не так, попробуйте снова',
-            error: error.message // Отправка сообщения об ошибке клиенту
+            error: error.message
         });
     }
 });

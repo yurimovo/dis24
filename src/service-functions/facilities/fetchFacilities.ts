@@ -2,7 +2,7 @@ import { FacilityInList } from "../../types/facilities";
 
 export const fetchFacilities = async () => {
 	try {
-		const r = await fetch(`/api/facilities/facility_list`, {
+		const r = await fetch(`/api/facilities/facility-list`, {
 			method: "GET",
 			mode: "cors",
 			credentials: "include",

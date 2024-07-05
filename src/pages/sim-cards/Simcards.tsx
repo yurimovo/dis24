@@ -9,7 +9,7 @@ import "./style.scss";
 
 import { SimcardInList, Simcard } from '../../types/simcards';
 import { fetchSimcards } from "../../service-functions/simcards/fetchSimcards";
-//import { createSimcard } from "../../service-functions/simcards/createSimcard";
+import { createSim } from "../../service-functions/simcards/createSim";
 
 const Simcards = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
@@ -32,12 +32,12 @@ const Simcards = () => {
 
     const handleToggleModal = () => setShowModal(!showModal);
 
-    /* const handleSimSave = async (e: React.FormEvent) => {
+    const handleSimSave = async (e: React.FormEvent) => {
         console.log('form data', formData);
         e.preventDefault();
         try {
-            await createSimcard(formData);
-            toast.success('SIM-карта создан', {
+            await createSim(formData);
+            toast.success('SIM-карта добавлена', {
                 onClose: () => {
                     fetchSimcards().then((response) => {
                         setSimList(response);
@@ -50,7 +50,7 @@ const Simcards = () => {
         } catch (error) {
             toast.error('Ошибка создания SIM-карты');
         }
-    }; */
+    };
 
     const handleSimCancel = () => {
         setShowModal(false);
@@ -171,7 +171,7 @@ const Simcards = () => {
                     <Button variant="secondary" onClick={handleSimCancel}>
                         Закрыть
                     </Button>
-                    <Button variant="success" /* onClick={handleSimSave} */>
+                    <Button variant="success" onClick={handleSimSave}>
                         Сохранить
                     </Button>
                 </Modal.Footer>
