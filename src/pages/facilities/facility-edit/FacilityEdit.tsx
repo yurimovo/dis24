@@ -39,7 +39,8 @@ const FacilityEdit = observer(() => {
         sim_number: '',
         responsible: '',
         assortment: '', 
-        security_hours: ''
+        security_hours: '',
+        comm_year: ''
     });
     const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -179,6 +180,11 @@ const FacilityEdit = observer(() => {
                             </div>
                             <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
                                 <Form.Control className='textField' type='text' placeholder='Часы охраны' id='security_hours' onChange={handleChange} value={selectedFacility?.security_hours} />
+                            </div>
+                        </div>
+                        <div className='row facility-edit__content__row justify-content-start align-items-start'>
+                            <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                                <Form.Control className='textField' type='text' placeholder='Год ввода в эксплуатацию' id='comm_year' onChange={handleChange} value={selectedFacility?.comm_year} />
                             </div>
                         </div>
                         <div className='facility-edit__buttons'>

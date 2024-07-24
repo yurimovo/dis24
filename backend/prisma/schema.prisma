@@ -104,6 +104,7 @@ model facilities {
   price_date            String? @db.VarChar(10)
   contruct_date         String? @db.VarChar(10)
   sim_number            String? @db.VarChar(50)
+  comm_year             String? @db.VarChar(4)
 }
 
 model hardware_apartments {
@@ -138,19 +139,20 @@ model hardware_facilities {
   fccid         String?   @db.VarChar(18)
 }
 
-model ls {
-  id      Int       @id @unique(map: "Индекс 2") @default(autoincrement())
-  ls_date DateTime? @db.Date
+model alarms {
+  alarm_id      Int       @id @unique(map: "Индекс 2") @default(autoincrement())
+  alarm_date    String?   @db.VarChar(10)
+  facility      String?   @db.VarChar(150)
 }
 
 model sim {
-  sim_id        Int     @id @unique(map: "Индекс 2") @default(autoincrement())
-  sim_number    String? @db.VarChar(10)
-  fccid         String? @db.VarChar(18)
-  object        String? @db.VarChar(150)
-  address       String? @db.VarChar(150)
-  pult_number   String? @db.VarChar(10)
-  mounting_date String? @db.VarChar(50)
+  sim_id        Int       @id @unique(map: "Индекс 2") @default(autoincrement())
+  sim_number    String?   @db.VarChar(10)
+  fccid         String?   @db.VarChar(18)
+  object        String?   @db.VarChar(150)
+  address       String?   @db.VarChar(150)
+  pult_number   String?   @db.VarChar(10)
+  mounting_date String?   @db.VarChar(50)
 }
 
 model taken_facilities {

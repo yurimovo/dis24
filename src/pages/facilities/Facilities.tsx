@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 //import { useNavigate } from 'react-router';
 import { Watch } from "react-loader-spinner";
 import { toast } from 'react-toastify';
 
 import FacilityRow from "./facility-row/FacilityRow";
+import FacilityDislocation from './facility-dislocation/FacilityDislocation';
 
 import "./style.scss";
 
@@ -38,7 +38,8 @@ const Facilities = () => {
         sim_number: '',
         responsible: '',
         assortment: '',
-        security_hours: ''
+        security_hours: '',
+        comm_year: ''
     });
 
     //const navigate = useNavigate();
@@ -103,6 +104,7 @@ const Facilities = () => {
                     <Button variant='success' onClick={handleToggleModal}>
                         Добавить
                     </Button>
+                    <FacilityDislocation />
                     {/* <Button variant='primary' onClick={handlePDF} style={{marginLeft: '10px'}}>Экспорт в PDF</Button> */}
                 </div>
             </div>
@@ -239,6 +241,11 @@ const Facilities = () => {
                             </div>
                             <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
                                 <Form.Control className='textField' type='text' placeholder='Часы охраны' id='security_hours' onChange={handleChange} value={formData.security_hours} />
+                            </div>
+                        </div>
+                        <div className='row justify-content-start align-items-start'>
+                            <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                                <Form.Control className='textField' type='text' placeholder='Год ввода в эксплуатацию' id='comm_year' onChange={handleChange} value={formData.comm_year} />
                             </div>
                         </div>
                     </div>

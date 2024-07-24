@@ -16,6 +16,7 @@ import Owners from "./pages/owners/Owners";
 import Simcards from './pages/sim-cards/Simcards';
 import SimEdit from './pages/sim-cards/sim-edit/SimEdit';
 import SimInfo from './pages/sim-cards/sim-info/SimInfo';
+import FalseAlarms from './pages/false-alarms/FalseAlarms';
 
 import "./main-container.scss";
 
@@ -38,6 +39,7 @@ function App() {
                     <Route path={'/simcards'} element={<Simcards />} />
                     <Route path={'/simcard-edit/:id'} element={<SimEdit />} />
                     <Route path={'/simcard-info/:id'} element={<SimInfo />} />
+                    <Route path={'/false-alarms'} element={<FalseAlarms />} />
                     <Route path="*" element={<MainPage />} />
                 </Routes>
                 <ToastContainer 

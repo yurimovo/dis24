@@ -19,7 +19,8 @@ export type Facility = {
     sim_number: string,
     responsible: string, 
     assortment: string, 
-    security_hours: string
+    security_hours: string,
+    comm_year: string
 };
 
 export type FacilityInList = {
@@ -27,4 +28,16 @@ export type FacilityInList = {
     facility: string,
     address: string,
     organization: string
+};
+
+export type ExportedFacility = {
+    positionNumber: string,
+    organization: string,
+    facility: string,
+    address: string,
+    contruct: string,
+    security_type: string,
+    spi: string,
+    comm_year: string,
+    surving_organization: string
 };

@@ -124,6 +124,10 @@ const FacilityInfo = observer(() => {
                         <div className="facility-info__content__row__title">Часы охраны:</div>
                         <div className="facility-info__content__row__content">{ selectedFacility?.security_hours }</div>
                     </div>
+                    <div className="facility-info__content__row">
+                        <div className="facility-info__content__row__title">Год ввода в эксплуатацию:</div>
+                        <div className="facility-info__content__row__content">{ selectedFacility?.comm_year }</div>
+                    </div>
                 </div>
             }
         </div>

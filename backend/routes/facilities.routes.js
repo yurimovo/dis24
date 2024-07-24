@@ -124,7 +124,8 @@ router.put('/facility-update/:id', async (req, res) => {
             sim_number,
             responsible,
             assortment,
-            security_hours
+            security_hours,
+            comm_year
         } = req.body;
 
         const updatedFacility = await prisma.facilities.update({
@@ -150,7 +151,8 @@ router.put('/facility-update/:id', async (req, res) => {
                 sim_number,
                 responsible,
                 assortment,
-                security_hours
+                security_hours,
+                comm_year
             }
         });
 

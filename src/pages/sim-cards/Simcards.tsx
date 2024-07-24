@@ -121,10 +121,11 @@ const Simcards = () => {
                 /> :
                 <div className='row'>
                     {
-                        (simList || []).map((sim: SimcardInList, idx) => (
+                        (simList || []).map((sim: SimcardInList, idx, key) => (
                             <SimRow
                                 simcard={sim}
                                 idx={idx+1}
+                                key={idx}
                                 reloadPage={reloadPage}
                             />
                         ))

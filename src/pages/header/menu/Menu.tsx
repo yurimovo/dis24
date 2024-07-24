@@ -25,6 +25,9 @@ const MenuBar = () => {
                 <li>
                     <a href="#"><Link to="/simcards">SIM-карты</Link></a>
                 </li>
+                <li>
+                    <a href="#"><Link to="/false-alarms">Ложняки</Link></a>
+                </li>
             </ul>
         </nav>
     );
