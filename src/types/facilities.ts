@@ -41,3 +41,8 @@ export type ExportedFacility = {
     comm_year: string,
     surving_organization: string
 };
+
+export type FacilityForForm = {
+    facility_id: number,
+    facility: string
+};

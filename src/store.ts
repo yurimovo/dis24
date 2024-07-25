@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 class DisStore {
-    currentUser = 'Гость';
+    currentUser = localStorage.getItem('user') || 'Гость';
     selectedApartmentId = 0;
     selectedActiveFacility = 0;
     selectedEditingFacility = 0;
@@ -10,6 +10,9 @@ class DisStore {
     selectedSimId = 0;
     selectedActiveSim = 0;
     selectedEditingSim = 0;
+    selectedAlarmId = 0;
+    selectedActiveAlarm = 0;
+    selectedEditingAlarm = 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -17,6 +20,7 @@ class DisStore {
 
     changeCurrentUser = (userName: string) => {
         this.currentUser = userName;
+        localStorage.setItem('user', userName);
     }
 
     changeApartmentId = (id: number) => {
@@ -49,6 +53,18 @@ class DisStore {
 
     changeEditingSim = (editingSim: number) => {
         this.selectedEditingSim = editingSim;
+    };
+
+    changeAlarmId = (alarmId: number) => {
+        this.selectedAlarmId = alarmId;
+    };
+
+    changeActiveAlarm = (activeAlarm: number) => {
+        this.selectedActiveAlarm = activeAlarm;
+    };
+
+    changeEditingAlarm = (editingAlarm: number) => {
+        this.selectedEditingAlarm = editingAlarm;
     };
 };
 

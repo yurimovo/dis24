@@ -11,6 +11,14 @@ router.get('/facility-list', async (req, res) => {
     res.json(facilityList);
 });
 
+router.get('/facility-for-form', async (req, res) => {
+    const facilityList = await prisma.facilities.findMany({
+        select: {facility_id: true, facility: true},
+        orderBy: {facility: 'asc'}
+    });
+    res.json(facilityList);
+});
+
 router.get('/facility-info/:id', async (req, res) => {
     const { id } = req.params;
 
@@ -72,7 +80,7 @@ router.post('/facility-add', async (req, res) => {
             organization, facility, address, contruct_number, contruct_date,
             price, price_date, ownership_type, facility_category, security_type, contruct_file_number,
             lettered_file_number, spi, facility_hardware, surving_organization, mounting_organization, pult_number,
-            sim_number, responsible, assortment, security_hours
+            sim_number, responsible, assortment, security_hours, comm_year
         } = req.body;
 
         const facilityCandidate = await prisma.facilities.create({
@@ -80,7 +88,7 @@ router.post('/facility-add', async (req, res) => {
                 organization, facility, address, contruct_number, contruct_date,
                 price, price_date, ownership_type, facility_category, security_type, contruct_file_number,
                 lettered_file_number, spi, facility_hardware, surving_organization, mounting_organization, pult_number,
-                sim_number, responsible, assortment, security_hours
+                sim_number, responsible, assortment, security_hours, comm_year
             }
         });
 

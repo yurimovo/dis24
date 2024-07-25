@@ -1,0 +1,31 @@
+.alarmRowContainer {
+    background-color: #fff5f2;
+    :hover {
+        background-color: #fad3ca;
+    }
+}
+
+.alarmRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #fad3ca;
+}
+
+.rowElement {
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    :hover {
+        cursor: pointer;
+    }
+}
