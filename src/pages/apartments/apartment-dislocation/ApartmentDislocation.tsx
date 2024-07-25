@@ -3,14 +3,13 @@ import { saveAs } from 'file-saver';
 import { Button } from "react-bootstrap";
 import Excel from 'exceljs';
 
-import { fetchAllFacilities } from "../../../service-functions/facilities/fetchAllFacilities";
-import { Facility, ExportedFacility } from "../../../types/facilities";
+import { fetchAllApartments } from "../../../service-functions/apartments/fetchAllApartments";
+import { Apartment, ExportedApartment } from "../../../types/apartments";
 
 const columns = [
     { header: '№ п/п', key: 'positionNumber', width: 5 },
-    { header: 'Наименование организации', key: 'organization', width: 30 },
-    { header: 'Наименование объекта', key: 'facility', width: 30 },
-    { header: 'Адрес объекта', key: 'address', width: 30 },
+    { header: 'Наименование МХИГ', key: 'owner', width: 30 },
+    { header: 'Адрес МХИГ', key: 'address', width: 30 },
     { header: '№ и дата договора', key: 'contruct', width: 20 },
     { header: 'Вид охраны', key: 'security_type', width: 15 },
     { header: 'Канал связи', key: 'spi', width: 20 },
@@ -20,12 +19,12 @@ const columns = [
 
 const workSheetName = 'Worksheet-1';
 
-const FacilityDislocation = () => {
-    const [facilities, setFacilities] = useState<Array<Facility>>([]);
-    const [exportedFacilities, setExportedFacilities] = useState<Array<ExportedFacility>>([]);
+const ApartmentDislocation = () => {
+    const [apartments, setApartments] = useState<Array<Apartment>>([]);
+    const [exportedApartments, setExportedApartments] = useState<Array<ExportedApartment>>([]);
     const workbook = new Excel.Workbook();
-    const workSheetName = 'Facilities';
-    const columns = [
+    const workSheetName = 'Apartments';
+    /* const columns = [
         { header: '№ п/п', width: 5 },
         { header: 'Наименование организации', width: 30 },
         { header: 'Наименование объекта', width: 30 },
@@ -35,29 +34,28 @@ const FacilityDislocation = () => {
         { header: 'Канал связи', width: 20 },
         { header: 'Год приемки ТСО в эксплуатацию', width: 15 },
         { header: 'Обслуживающая организация', width: 30 },
-    ];
+    ]; */
 
-    const convertFacilitiesToRightFormat = (facilities: Array<Facility>) => {
-        const expFacilities = facilities.map((facility, index) => {
+    const convertApartmentsToRightFormat = (apartments: Array<Apartment>) => {
+        const expApartments = apartments.map((apartment, index) => {
             return {
                 positionNumber: String(index + 1),
-                organization: facility.organization,
-                facility: facility.facility,
-                address: facility.address,
-                contruct: `№ ${facility.contruct_number} от ${facility.contruct_date}`,
-                security_type: facility.security_type,
-                spi: facility.spi,
-                comm_year: facility.comm_year,
-                surving_organization: facility.surving_organization,
+                owner: apartment.owner,
+                address: apartment.address,
+                contruct: `№ ${apartment.contruct_number} от ${apartment.contruct_date}`,
+                security_type: apartment.security_type,
+                spi: apartment.spi,
+                comm_year: apartment.comm_year,
+                surving_organization: apartment.surving_organization,
             };
         });
-        setExportedFacilities(expFacilities);
+        setExportedApartments(expApartments);
     };
 
     useEffect(() => {
-        fetchAllFacilities()
-            .then((response: Array<Facility>) => {
-                setFacilities(response);
+        fetchAllApartments()
+            .then((response: Array<Apartment>) => {
+                setApartments(response);
             })
             .catch(error => {
                 console.error(error);
@@ -65,10 +63,10 @@ const FacilityDislocation = () => {
     }, []);
 
     useEffect(() => {
-        if (facilities.length > 0) {
-            convertFacilitiesToRightFormat(facilities);
+        if (apartments.length > 0) {
+            convertApartmentsToRightFormat(apartments);
         }
-    }, [facilities]);
+    }, [apartments]);
 
     const exportToExcel = async () => {
         try {
@@ -76,13 +74,13 @@ const FacilityDislocation = () => {
             const worksheet = workbook.addWorksheet(workSheetName);
 
             // Добавление заголовков
-            worksheet.getCell('A1').value = 'Дислокация объектов';
+            worksheet.getCell('A1').value = 'Дислокация МХИГ';
             worksheet.getCell('A2').value = 'Калачинского МОВО - филиала ФГКУ "УВО ВНГ России по Омской области"';
             worksheet.getCell('A3').value = 'по состоянию на ' + new Date().toLocaleDateString();
 
-            worksheet.mergeCells('A1:I1');
-            worksheet.mergeCells('A2:I2');
-            worksheet.mergeCells('A3:I3');
+            worksheet.mergeCells('A1:H1');
+            worksheet.mergeCells('A2:H2');
+            worksheet.mergeCells('A3:H3');
 
             // Добавление заголовков таблицы в 4-ю строку
             const headerRow = worksheet.getRow(5);
@@ -96,7 +94,7 @@ const FacilityDislocation = () => {
             });
 
             // Добавление данных, начиная с 6-й строки
-            exportedFacilities.forEach((singleData, index) => {
+            exportedApartments.forEach((singleData, index) => {
                 worksheet.addRow(Object.values(singleData));
             });
 
@@ -118,7 +116,7 @@ const FacilityDislocation = () => {
 
             // Запись и сохранение файла
             const buf = await workbook.xlsx.writeBuffer();
-            saveAs(new Blob([buf]), `facilities.xlsx`);
+            saveAs(new Blob([buf]), `apartments.xlsx`);
         } catch (error) {
             console.error('<<<ОШИБКА>>>', error);
             console.error('Что-то пошло не так', error);
@@ -135,4 +133,4 @@ const FacilityDislocation = () => {
     );
 };
 
-export default FacilityDislocation;
+export default ApartmentDislocation;

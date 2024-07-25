@@ -28,6 +28,7 @@ model apartments {
   mounting_organization String? @db.VarChar(50)
   surving_organization  String? @db.VarChar(50)
   assortment            String? @db.VarChar(50)
+  comm_year             String? @db.VarChar(4)
 }
 
 model archive_apartments {

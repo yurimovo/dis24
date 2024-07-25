@@ -117,6 +117,10 @@ const ApartmentInfo = observer(() => {
                         <div className="apartment-info__content__row__title">Подбор:</div>
                         <div className="apartment-info__content__row__content">{ selectedApartment?.assortment }</div>
                     </div>
+                    <div className="apartment-info__content__row">
+                        <div className="apartment-info__content__row__title">Год ввода в эксплуатацию:</div>
+                        <div className="apartment-info__content__row__content">{ selectedApartment?.comm_year }</div>
+                    </div>
                 </div>
             }
         </div>

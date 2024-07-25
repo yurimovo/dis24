@@ -18,6 +18,7 @@ export type Apartment = {
     mounting_organization: string, 
     surving_organization: string, 
     assortment: string,
+    comm_year: string
 };
 
 export type ApartmentInList = {
@@ -25,4 +26,15 @@ export type ApartmentInList = {
     address: string,
     contruct_number: string,
     owner: string
+};
+
+export type ExportedApartment = {
+    positionNumber: string,
+    owner: string,
+    address: string,
+    contruct: string,
+    security_type: string,
+    spi: string,
+    comm_year: string,
+    surving_organization: string
 };

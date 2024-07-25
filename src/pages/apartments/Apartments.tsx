@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Apartment, ApartmentInList } from '../../types/apartments';
 
 import ApartmentRow from "./apartment-row/ApartmentRow";
+import ApartmentDislocation from './apartment-dislocation/ApartmentDislocation';
 
 import "./style.scss";
 import {fetchApartments} from "../../service-functions/apartments/fetchApartments";
@@ -34,7 +35,8 @@ const Apartments = () => {
     apartment_hardware: '', 
     mounting_organization: '',
     surving_organization: '', 
-    assortment: ''
+    assortment: '',
+    comm_year: ''
   });
 
   const handleToggleModal = () => setShowModal(!showModal);
@@ -93,8 +95,9 @@ const Apartments = () => {
       <div className='row'>
         <div className='col-xl-12 col-lg-12-col-md-12' style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <Button variant='success' onClick={handleToggleModal}>
-            Добавить МПХИГ
+            Добавить
           </Button>
+          <ApartmentDislocation />
         </div>
       </div>
       <div className='row tableHeader'>
@@ -215,6 +218,11 @@ const Apartments = () => {
               </div>
               <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
                 <Form.Control className='textField' type='text' placeholder='ИНН' id='inn' onChange={handleChange} value={formData.inn} />
+              </div>
+            </div>
+            <div className='row justify-content-start align-items-start'>
+              <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                <Form.Control className='textField' type='text' placeholder='Год ввода в эксплуатацию' id='comm_year' onChange={handleChange} value={formData.comm_year} />
               </div>
             </div>
           </div>

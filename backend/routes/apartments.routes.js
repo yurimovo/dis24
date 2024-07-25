@@ -71,14 +71,14 @@ router.post('/apartment-add', async (req, res) => {
         const { 
             owner, address, phones, inn, contruct_number, contruct_date, price, price_date, security_type, contruct_file_number,
             lettered_file_number, apartment_category, penal_number, pult_number, spi, apartment_hardware, mounting_organization,
-            surving_organization, assortment
+            surving_organization, assortment, comm_year
         } = req.body;
 
         const apartmentCandidate = await prisma.apartments.create({
             data: {
                 owner, address, phones, inn, contruct_number, contruct_date, price, price_date, security_type, contruct_file_number,
                 lettered_file_number, apartment_category, penal_number, pult_number, spi, apartment_hardware, mounting_organization,
-                surving_organization, assortment
+                surving_organization, assortment, comm_year
             }
         });
 
@@ -104,7 +104,7 @@ router.put('/apartment-update/:id', async (req, res) => {
         const {
             owner, address, phones, inn, contruct_number, contruct_date, price, price_date, security_type, contruct_file_number,
             lettered_file_number, apartment_category, penal_number, pult_number, spi, apartment_hardware, mounting_organization,
-            surving_organization, assortment
+            surving_organization, assortment, comm_year
         } = req.body;
 
         const updatedApartment = await prisma.apartments.update({
@@ -112,7 +112,7 @@ router.put('/apartment-update/:id', async (req, res) => {
             data: {
                 owner, address, phones, inn, contruct_number, contruct_date, price, price_date, security_type, contruct_file_number,
                 lettered_file_number, apartment_category, penal_number, pult_number, spi, apartment_hardware, mounting_organization,
-                surving_organization, assortment
+                surving_organization, assortment, comm_year
             }
         });
 

@@ -37,7 +37,8 @@ const ApartmentEdit = observer(() => {
         apartment_hardware: '', 
         mounting_organization: '',
         surving_organization: '', 
-        assortment: ''
+        assortment: '',
+        comm_year: ''
     });
     const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -170,6 +171,11 @@ const ApartmentEdit = observer(() => {
                             </div>
                             <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
                                 <Form.Control className='textField' type='text' placeholder='Подбор' id='assortment' onChange={handleChange} value={selectedApartment?.assortment} />
+                            </div>
+                        </div>
+                        <div className='row apartment-edit__content__row justify-content-start align-items-start'>
+                            <div className='col-xxl-6 col-xl-6 col-lg-6 col-md-6'>
+                                <Form.Control className='textField' type='text' placeholder='Год ввода в эксплуатацию' id='comm_year' onChange={handleChange} value={selectedApartment?.comm_year} />
                             </div>
                         </div>
                         <div className='apartment-edit__buttons'>
