@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Header from './pages/header/Header';
 import MainPage from "./pages/main-page/MainPage";
+import Register from './pages/main-page/register/Register';
 import Facilities from "./pages/facilities/Facilities";
 import FacilityInfo from './pages/facilities/facility-info/FacilityInfo';
 import FacilityEdit from './pages/facilities/facility-edit/FacilityEdit';
@@ -27,6 +28,7 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path={'/'} element={<MainPage />} />
+                    <Route path={'/register'} element={<Register />} />
                     <Route path={'/facilities'} element={<Facilities />} />
                     <Route path={'/facility-info/:id'} element={<FacilityInfo />} />
                     <Route path={'/facility-edit/:id'} element={<FacilityEdit />} />

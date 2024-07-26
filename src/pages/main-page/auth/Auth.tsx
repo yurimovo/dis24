@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { auth } from '../../../firebase';
 
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -11,32 +12,37 @@ import store from "../../../store";
 import "./style.scss";
 
 const Auth = () => {
-    const { changeCurrentUser } = store;
-    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [user, setUser] = useState<string>('');
-
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUser(e.target.value);
-    };
-
-    const handleSubmit = () => {
-        changeCurrentUser(user);
-        navigate('/facilities');
+    const handleSignIn = async (event: React.FormEvent) => {
+        event.preventDefault();
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            alert('User signed in successfully');
+        } catch (error) {
+            console.error("Error signing in: ", error);
+        }
     };
 
     return (
-        <div className="login-container">
-            <form onSubmit={handleSubmit} className='login-form'>
-                <input
-                    className='login-form__textField'
-                    placeholder='Имя пользователя'
-                    onChange={handleUsernameChange}    
-                />
-                <Button className='login-form__loginButton' type='submit' variant='success'>Войти</Button>
-            </form>
-        </div>
-    )
+        <form onSubmit={handleSignIn}>
+            <h1>Sign In</h1>
+            <input 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                placeholder="Email" 
+            />
+            <input 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                placeholder="Password" 
+            />
+            <button type="submit">Sign In</button>
+        </form>
+    );
 };
 
 export default Auth;
