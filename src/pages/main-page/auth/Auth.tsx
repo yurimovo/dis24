@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { auth } from '../../../firebase';
 
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
-import { User } from "../../../types/users";
-
-import store from "../../../store";
 
 import "./style.scss";
 
@@ -26,22 +21,28 @@ const Auth = () => {
     };
 
     return (
-        <form onSubmit={handleSignIn}>
-            <h1>Sign In</h1>
-            <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                placeholder="Email" 
-            />
-            <input 
-                type="password" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                placeholder="Password" 
-            />
-            <button type="submit">Sign In</button>
-        </form>
+        <div className="auth">
+            <form className="auth-form" onSubmit={handleSignIn}>
+                <div className='auth-form__title'>АВТОРИЗАЦИЯ</div>
+                <input 
+                    className='auth-form__input'
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Email" 
+                />
+                <input 
+                    className='auth-form__input'
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Пароль" 
+                />
+                <Button className='auth-form__button' variant='success' onClick={handleSignIn}>Войти</Button>
+                <div className='auth-form__not-registered'>У вас нет аккаунта? <a href='/register' className='auth-form__link'>Создать</a></div>
+            </form>
+        </div>
+        
     );
 };
 

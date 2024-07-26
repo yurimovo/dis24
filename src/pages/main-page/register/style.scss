@@ -1,65 +1,65 @@
-.register_container {
+.register {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 1px solid #fff5f2;
-    border-radius: 4px;
-    margin: 10px;
-    padding: 10px;
-}
+    background-color: #f2d8cb;
+    height: 100vh;
 
-.register_form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
+    .register-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        border: 1px solid #b5533e;
+        border-radius: 8px;
+        padding: 30px;
+        background-color: #fff5f2;
+    
+    
+        .register-form__title {
+            display: flex;
+            justify-content: center;
+            font-family: 'Roboto', serif;
+            font-weight: 500;
+            font-size: 32px;
+            color: #b5533e;
+            width: 300px;
+            height: 40px;
+            border-radius: 4px;
+            border: none;
+            margin-bottom: 10px;
+        }
+    
+        .register-form__input {
+            display: flex;
+            width: 300px;
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid #b5533e;
+            margin-bottom: 10px;
+            padding: 7px;
+        }
 
-.register_form__textField {
-    display: flex;
-    width: 300px;
-    height: 40px;
-    border-radius: 4px;
-    border: none;
-}
+        .register-form__button {
+            display: flex;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
-.register_form__saveButton {
-    display: flex;
-    width: 160px;
-    height: 40px;
-    border-radius: 4px;
-    border: none;
-    text-align: center;
-    background-color: #a84220;
-    :hover {
-        background-color: #b8783d;
-    }
-}
+        .register-form__already-registered {
+            display: flex;
+            color: #b5533e;
+            margin-bottom: 10px;
 
-.register_form__footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
+            .register-form__link {
+                text-decoration: none;
+                margin-left: 5px;
+            }
 
-.register_form__footer__span {
-    font-family: Roboto, serif;
-    font-weight: 400;
-    font-size: 12px;
-    color: #a84220;
-}
-
-.register_form__footer__span {
-    font-family: Roboto, serif;
-    font-weight: 400;
-    font-size: 12px;
-    color: #b8783d;
-    margin-left: 5px;
-    :hover {
-        cursor: pointer;
+            .register-form__link:hover {
+                color: #b5533e;
+            }
+        }
     }
 }

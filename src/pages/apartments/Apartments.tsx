@@ -9,7 +9,7 @@ import ApartmentRow from "./apartment-row/ApartmentRow";
 import ApartmentDislocation from './apartment-dislocation/ApartmentDislocation';
 
 import "./style.scss";
-import {fetchApartments} from "../../service-functions/apartments/fetchApartments";
+import { fetchApartments } from "../../service-functions/apartments/fetchApartments";
 import { createApartment } from '../../service-functions/apartments/createApartment';
 
 const Apartments = () => {

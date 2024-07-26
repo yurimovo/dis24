@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import Auth from './auth/Auth';
 import Register from './register/Register';
+
+import DisLogo from '../../assetts/dis_logo.png';
 
 import "./style.scss";
 
@@ -19,15 +21,7 @@ const MainPage = () => {
 
     return (
         <div className='main_formContainer'>
-            <div className='main_formBody'>
-                <div className='main_titleRow'>
-                    Регистрация
-                </div>
-                <div className='form_formContent'>
-                    {/* {isRegister ? <Register /> : <Auth />} */}
-                    <Auth />
-                </div>
-            </div>
+            <img src={DisLogo} alt='Dislocation 2024' />
         </div>
     );
 };

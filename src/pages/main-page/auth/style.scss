@@ -1,40 +1,65 @@
-.login-container {
+.auth {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 1px solid #fff5f2;
-    border-radius: 4px;
-    margin: 10px;
-    padding: 10px;
-}
+    background-color: #f2d8cb;
+    height: 100vh;
 
-.login-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        border: 1px solid #b5533e;
+        border-radius: 8px;
+        padding: 30px;
+        background-color: #fff5f2;
+    
+    
+        .auth-form__title {
+            display: flex;
+            justify-content: center;
+            font-family: 'Roboto', serif;
+            font-weight: 500;
+            font-size: 32px;
+            color: #b5533e;
+            width: 300px;
+            height: 40px;
+            border-radius: 4px;
+            border: none;
+            margin-bottom: 10px;
+        }
+    
+        .auth-form__input {
+            display: flex;
+            width: 300px;
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid #b5533e;
+            margin-bottom: 10px;
+            padding: 7px;
+        }
 
-.login-form__textField {
-    display: flex;
-    width: 300px;
-    height: 40px;
-    border-radius: 4px;
-    border: none;
-}
+        .auth-form__button {
+            display: flex;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
-.login-form__loginButton {
-    display: flex;
-    width: 160px;
-    height: 40px;
-    margin-top: 20px;
-    border-radius: 4px;
-    border: none;
-    text-align: center;
-    background-color: #a84220;
-    :hover {
-        background-color: #b8783d;
+        .auth-form__not-registered {
+            display: flex;
+            color: #b5533e;
+            margin-bottom: 10px;
+
+            .auth-form__link {
+                text-decoration: none;
+                margin-left: 5px;
+            }
+
+            .auth-form__link:hover {
+                color: #b5533e;
+            }
+        }
     }
 }

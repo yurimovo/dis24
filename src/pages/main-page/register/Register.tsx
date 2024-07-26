@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { auth } from '../../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from 'react-bootstrap';
-
-import { User } from '../../../types/users';
-
-import { createUser } from '../../../service-functions/users/createUser';
 
 import "./style.scss";
 
@@ -29,22 +24,27 @@ const Register = () => {
     };
 
     return (
-        <form onSubmit={handleSignUp}>
-            <h1>Sign Up</h1>
-            <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                placeholder="Email" 
-            />
-            <input 
-                type="password" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                placeholder="Password" 
-            />
-            <button type="submit">Sign Up</button>
-        </form>
+        <div className="register">
+            <form className="register-form" onSubmit={handleSignUp}>
+                <div className='register-form__title'>РЕГИСТРАЦИЯ</div>
+                <input
+                    className='register-form__input' 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Email" 
+                />
+                <input 
+                    className='register-form__input'
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Пароль" 
+                />
+                <Button className='register-form__button' variant='success' onClick={handleSignUp}>Зарегистрироваться</Button>
+                <div className='register-form__already-registered'>У вас уже есть аккаунт? <a href='/auth' className='register-form__link'>Войти</a></div>
+            </form>
+        </div>
     );
 };
 
