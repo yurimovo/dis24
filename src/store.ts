@@ -13,6 +13,11 @@ class DisStore {
     selectedAlarmId = 0;
     selectedActiveAlarm = 0;
     selectedEditingAlarm = 0;
+    authenticatedUser = {
+        email: '',
+        id: '',
+        token: '',
+    };
 
     constructor() {
         makeAutoObservable(this);
@@ -65,6 +70,14 @@ class DisStore {
 
     changeEditingAlarm = (editingAlarm: number) => {
         this.selectedEditingAlarm = editingAlarm;
+    };
+
+    setAuthenticatedUser = (email: string, id: string, token: string) => {
+        this.authenticatedUser = {
+            email: email,
+            id: id,
+            token: token
+        };
     };
 };
 

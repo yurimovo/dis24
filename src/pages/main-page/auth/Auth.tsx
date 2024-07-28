@@ -1,28 +1,44 @@
 import React, { useState } from "react";
-import { auth } from '../../../firebase';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { Button } from 'react-bootstrap';
+import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { setUser } from "redux-store/slices/userSlice";
 
 import "./style.scss";
 
 const Auth = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const auth = getAuth();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignIn = async (event: React.FormEvent) => {
+    const handleSignIn = (event: React.FormEvent) => {
         event.preventDefault();
         try {
-            await auth.signInWithEmailAndPassword(email, password);
-            alert('User signed in successfully');
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                user?.getIdToken().then((token) => {
+                    localStorage.setItem('authToken', token);
+                    toast.success('Авторизация прошла успешно');
+                    navigate('/facilities');
+                });
+            })
         } catch (error) {
-            console.error("Error signing in: ", error);
+            toast.error('Ошибка авторизации');
+            setEmail('');
+            setPassword('');
         }
     };
 
     return (
         <div className="auth">
-            <form className="auth-form" onSubmit={handleSignIn}>
+            <form className="auth-form" /* onSubmit={handleSignIn} */>
                 <div className='auth-form__title'>АВТОРИЗАЦИЯ</div>
                 <input 
                     className='auth-form__input'

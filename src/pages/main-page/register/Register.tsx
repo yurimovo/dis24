@@ -1,26 +1,47 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { auth } from '../../../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../../redux-store/slices/userSlice';
+import { AppDispatch } from '../../../redux-store';
+import { toast } from 'react-toastify';
+
+//import store from '../../../store';
 
 import "./style.scss";
 
 
 const Register = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formEmail, setFormEmail] = useState('');
+    const [formPassword, setFormPassword] = useState('');
 
-    const handleSignUp = (event: React.FormEvent) => {
+    //const { setAuthenticatedUser } = store;
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+
+    const handleSignUp = async (event: React.FormEvent) => {
         event.preventDefault();
+        const auth = getAuth();
         try {
-            createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                console.log("userCredential: ", userCredential);
-            });
-            alert('User registered successfully');
+            const userCredential = await createUserWithEmailAndPassword(auth, formEmail, formPassword);
+            const user = userCredential.user;
+            const idToken = await user.getIdToken();
+
+            if (user.email) {
+                dispatch(setUser({
+                    email: user.email,
+                    uid: user.uid,
+                    idToken: idToken,
+                }));
+                navigate('/facilities');
+            } else {
+                toast.error('Email пустой');
+            }
         } catch (error) {
-            console.error("Error signing up: ", error);
+            toast.error('Ошибка регистрации');
         }
+        //setAuthenticatedUser(user.email, user.uid, user.scs)
     };
 
     return (
@@ -30,15 +51,15 @@ const Register = () => {
                 <input
                     className='register-form__input' 
                     type="email" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
+                    value={formEmail} 
+                    onChange={(e) => setFormEmail(e.target.value)} 
                     placeholder="Email" 
                 />
                 <input 
                     className='register-form__input'
                     type="password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
+                    value={formPassword} 
+                    onChange={(e) => setFormPassword(e.target.value)} 
                     placeholder="Пароль" 
                 />
                 <Button className='register-form__button' variant='success' onClick={handleSignUp}>Зарегистрироваться</Button>
