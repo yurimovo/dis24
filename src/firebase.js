@@ -1,6 +1,7 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
+// Ваша конфигурация Firebase (замените своими параметрами)
 const firebaseConfig = {
     apiKey: "AIzaSyCNLUiN1cxJ63hA-Cs2r0rREEHN8WW2c34",
     authDomain: "dis24-b874a.firebaseapp.com",
@@ -11,7 +12,10 @@ const firebaseConfig = {
     measurementId: "G-17X2WTTQTW"
 };
 
-firebase.initializeApp(firebaseConfig);
+// Инициализация Firebase
+const app = initializeApp(firebaseConfig);
 
-export const auth = firebase.auth();
-export default firebase;
+// Инициализация сервиса аутентификации
+const auth = getAuth(app);
+
+export { app, auth };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { app } from "../../../firebase";
 
 import { Button } from 'react-bootstrap';
 import { toast } from "react-toastify";
@@ -12,28 +13,26 @@ import "./style.scss";
 const Auth = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const auth = getAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSignIn = (event: React.FormEvent) => {
         event.preventDefault();
-        try {
-            signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                user?.getIdToken().then((token) => {
-                    localStorage.setItem('authToken', token);
-                    toast.success('Авторизация прошла успешно');
-                    navigate('/facilities');
-                });
-            })
-        } catch (error) {
+        const auth = getAuth(app);
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            user?.getIdToken().then((token) => {
+                dispatch(setUser({ email: user.email, uid: user.uid, idToken: token }));
+                toast.success('Авторизация прошла успешно');
+                navigate('/facilities');
+            });
+        }).catch((error) => {
             toast.error('Ошибка авторизации');
             setEmail('');
             setPassword('');
-        }
+        })
     };
 
     return (
