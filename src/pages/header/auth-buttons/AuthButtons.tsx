@@ -4,6 +4,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../../firebase";
 import { useDispatch } from "react-redux";
 import { removeUser } from "redux-store/slices/userSlice";
+import { useAuth } from "hooks/userAuth.hook";
 
 import "./style.scss";
 
@@ -15,6 +16,7 @@ const AuthButtons = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const auth = getAuth(app);
+    const { isAuth } = useAuth();
 
     const handleSignOut = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -26,9 +28,9 @@ const AuthButtons = () => {
 
     return (
         <div className='auth-buttons'>
-            <img src={SignUpButton} alt='Sign up' style={{ marginRight: '10px' }} onClick={() => navigate('/register')} />
-            <img src={SignInButton} alt='Sign in' style={{ marginRight: '10px' }} onClick={() => navigate('/auth')} />
-            <img src={LogoutButton} alt='Logout' style={{ marginRight: '10px' }} onClick={handleSignOut} />
+            {!isAuth && <img src={SignUpButton} alt='Sign up' style={{ marginRight: '10px' }} onClick={() => navigate('/register')} />}
+            {!isAuth && <img src={SignInButton} alt='Sign in' style={{ marginRight: '10px' }} onClick={() => navigate('/auth')} />}
+            {isAuth && <img src={LogoutButton} alt='Logout' style={{ marginRight: '10px' }} onClick={handleSignOut} />}
         </div>
     );
 };
