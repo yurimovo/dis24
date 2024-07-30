@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from "../../../firebase";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { app, auth, db } from "../../../firebase";
 
 import { Button } from 'react-bootstrap';
 import { toast } from "react-toastify";
@@ -16,23 +17,29 @@ const Auth = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userName, setUserName] = useState('');
 
-    const handleSignIn = (event: React.FormEvent) => {
+    const handleSignIn = async (event: React.FormEvent) => {
         event.preventDefault();
-        const auth = getAuth(app);
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
             const user = userCredential.user;
-            user?.getIdToken().then((token) => {
-                dispatch(setUser({ email: user.email, uid: user.uid, idToken: token }));
-                toast.success('Авторизация прошла успешно');
-                navigate('/facilities');
-            });
-        }).catch((error) => {
+            const token = await user?.getIdToken();
+
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (userDoc.exists()) {
+                setUserName(userDoc.data().username);
+            }
+
+            dispatch(setUser({ email: user.email, uid: user.uid, idToken: token, userName: userName }));
+
+            toast.success('Авторизация прошла успешно');
+            navigate('/facilities');
+        } catch (error) {
             toast.error('Ошибка авторизации');
             setEmail('');
             setPassword('');
-        })
+        }
     };
 
     return (

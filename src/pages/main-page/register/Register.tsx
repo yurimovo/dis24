@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../../../firebase';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../../redux-store/slices/userSlice';
@@ -14,6 +16,7 @@ import "./style.scss";
 
 const Register = () => {
     const [formEmail, setFormEmail] = useState('');
+    const [formUsername, setFormUsername] = useState('');
     const [formPassword, setFormPassword] = useState('');
 
     //const { setAuthenticatedUser } = store;
@@ -22,17 +25,22 @@ const Register = () => {
 
     const handleSignUp = async (event: React.FormEvent) => {
         event.preventDefault();
-        const auth = getAuth();
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, formEmail, formPassword);
             const user = userCredential.user;
             const idToken = await user.getIdToken();
+
+            await setDoc(doc(db, 'users', user.uid), {
+                username: formUsername,
+                email: user.email,
+            });
 
             if (user.email) {
                 dispatch(setUser({
                     email: user.email,
                     uid: user.uid,
                     idToken: idToken,
+                    userName: formUsername
                 }));
                 navigate('/facilities');
             } else {
@@ -54,6 +62,13 @@ const Register = () => {
                     value={formEmail} 
                     onChange={(e) => setFormEmail(e.target.value)} 
                     placeholder="Email" 
+                />
+                <input
+                    className='register-form__input' 
+                    type="username" 
+                    value={formUsername} 
+                    onChange={(e) => setFormUsername(e.target.value)} 
+                    placeholder="Отображаемое имя" 
                 />
                 <input 
                     className='register-form__input'

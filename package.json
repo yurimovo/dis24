@@ -1,6 +1,6 @@
 {
   "name": "dis24",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
