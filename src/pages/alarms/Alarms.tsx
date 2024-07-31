@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { Watch } from "react-loader-spinner";
 import { toast } from 'react-toastify';
-
+import Error403 from '../../assetts/403.png';
 import AlarmRow from "./alarm-row/AlarmRow";
+import { useAuth } from 'hooks/userAuth.hook';
 
 import "./style.scss";
 
@@ -22,6 +23,7 @@ const Alarms = () => {
         facility: '',
         alarm_date: ''
     });
+    const { isAuth } = useAuth();
 
     const reloadPage = () => {
         window.location.reload();
@@ -82,7 +84,7 @@ const Alarms = () => {
         })
     },[]);
 
-    return (
+    return isAuth ? (
         <div className='container alarms'>
             <div className='row pageHeader'>
                 Ложняки
@@ -167,6 +169,10 @@ const Alarms = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+        </div>
+    ) : (
+        <div className='container alarms' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img src={Error403} alt='Доступ запрещен' style={{ width: '400px', height: 'auto' }} />
         </div>
     );
 };

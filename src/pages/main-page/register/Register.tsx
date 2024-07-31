@@ -9,8 +9,6 @@ import { setUser } from '../../../redux-store/slices/userSlice';
 import { AppDispatch } from '../../../redux-store';
 import { toast } from 'react-toastify';
 
-//import store from '../../../store';
-
 import "./style.scss";
 
 
@@ -19,7 +17,6 @@ const Register = () => {
     const [formUsername, setFormUsername] = useState('');
     const [formPassword, setFormPassword] = useState('');
 
-    //const { setAuthenticatedUser } = store;
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -42,7 +39,7 @@ const Register = () => {
                     idToken: idToken,
                     userName: formUsername
                 }));
-                navigate('/facilities');
+                navigate('/main');
             } else {
                 toast.error('Email пустой');
             }

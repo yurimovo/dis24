@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from "../../../firebase";
-
 import { Button } from 'react-bootstrap';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { setUser } from "redux-store/slices/userSlice";
+import { useAuth } from "hooks/userAuth.hook";
 
 import "./style.scss";
 
 const Auth = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { isAuth } = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -34,13 +35,19 @@ const Auth = () => {
             dispatch(setUser({ email: user.email, uid: user.uid, idToken: token, userName: fetchedUserName }));
 
             toast.success('Авторизация прошла успешно');
-            navigate('/facilities');
+            navigate('/main');
         } catch (error) {
             toast.error('Ошибка авторизации');
             setEmail('');
             setPassword('');
         }
     };
+
+    useEffect(() => {
+        if (isAuth) {
+            navigate('/main');
+        }
+    }, []);
 
     return (
         <div className="auth">

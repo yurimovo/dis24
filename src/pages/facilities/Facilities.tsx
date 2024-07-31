@@ -3,9 +3,10 @@ import { Modal, Form, Button } from 'react-bootstrap';
 //import { useNavigate } from 'react-router';
 import { Watch } from "react-loader-spinner";
 import { toast } from 'react-toastify';
-
 import FacilityRow from "./facility-row/FacilityRow";
 import FacilityDislocation from './facility-dislocation/FacilityDislocation';
+import Error403 from '../../assetts/403.png';
+import { useAuth } from 'hooks/userAuth.hook';
 
 import "./style.scss";
 
@@ -43,6 +44,7 @@ const Facilities = () => {
     });
 
     //const navigate = useNavigate();
+    const { isAuth } = useAuth();
 
     const reloadPage = () => {
         window.location.reload();
@@ -94,7 +96,7 @@ const Facilities = () => {
         });
     },[]);
 
-    return (
+    return isAuth ? (
         <div className='container facilities'>
             <div className='row pageHeader'>
                 Дислокация объектов
@@ -259,6 +261,10 @@ const Facilities = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+        </div>
+    ) : (
+        <div className='container facilities' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img src={Error403} alt='Доступ запрещен' style={{ width: '400px', height: 'auto' }} />
         </div>
     );
 };

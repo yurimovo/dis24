@@ -41,7 +41,7 @@ const Apartments = () => {
 
   const navigate = useNavigate();
 
-  const { isAuth, email } = useAuth();
+  const { isAuth } = useAuth();
 
   const handleToggleModal = () => setShowModal(!showModal);
 

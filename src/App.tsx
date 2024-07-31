@@ -28,7 +28,8 @@ function App() {
             <div className='template-container'>
                 <Header />
                 <Routes>
-                    <Route path={'/'} element={<MainPage />} />
+                    <Route path={'/'} element={<Auth />} />
+                    <Route path={'/main'} element={<MainPage />} />
                     <Route path={'/auth'} element={<Auth />} />
                     <Route path={'/register'} element={<Register />} />
                     <Route path={'/facilities'} element={<Facilities />} />

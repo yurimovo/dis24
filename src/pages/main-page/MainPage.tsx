@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import Auth from './auth/Auth';
-import Register from './register/Register';
-
+import React, { useEffect } from 'react';
 import DisLogo from '../../assetts/dis_logo.png';
+import { useAuth } from 'hooks/userAuth.hook';
+import { useNavigate } from 'react-router-dom';
 
 import "./style.scss";
 
 const MainPage = () => {
-    const [isRegister, setRegister] = useState<boolean>(true);
+    const { isAuth } = useAuth();
+    const navigate = useNavigate();
 
-    const handleAuthSwitch = () => {
-        setRegister(false);
-    };
+    useEffect(() => {
+        if (!isAuth) {
+            navigate('/auth');
+        }
+    }, [isAuth, navigate]);
 
-    const handleRegisterSwitch = () => {
-        setRegister(true);
-    };
-
-    return (
+    return isAuth ? (
         <div className='main_formContainer'>
             <img src={DisLogo} alt='Dislocation 2024' />
         </div>
+    ) : (
+        null
     );
 };
 

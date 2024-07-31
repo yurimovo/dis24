@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { Watch } from "react-loader-spinner";
 import { toast } from 'react-toastify';
-
 import SimRow from "./sim-row/SimRow";
+import { useAuth } from 'hooks/userAuth.hook';
+import Error403 from '../../assetts/403.png';
 
 import "./style.scss";
 
@@ -23,6 +24,7 @@ const Simcards = () => {
         pult_number: '',
         mounting_date: ''
     });
+    const { isAuth } = useAuth();
 
     //const navigate = useNavigate();
 
@@ -76,7 +78,7 @@ const Simcards = () => {
         });
     },[]);
 
-    return (
+    return isAuth ? (
         <div className='container simcards'>
             <div className='row pageHeader'>
                 Дислокация SIM-карт
@@ -177,6 +179,10 @@ const Simcards = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+        </div>
+    ) : (
+        <div className='container simcards' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img src={Error403} alt='Доступ запрещен' style={{ width: '400px', height: 'auto' }} />
         </div>
     );
 };
