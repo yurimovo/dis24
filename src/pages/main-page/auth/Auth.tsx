@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { app, auth, db } from "../../../firebase";
+import { auth, db } from "../../../firebase";
 
 import { Button } from 'react-bootstrap';
 import { toast } from "react-toastify";
@@ -17,10 +17,10 @@ const Auth = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userName, setUserName] = useState('');
 
     const handleSignIn = async (event: React.FormEvent) => {
         event.preventDefault();
+        let fetchedUserName = '';
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
             const user = userCredential.user;
@@ -28,10 +28,10 @@ const Auth = () => {
 
             const userDoc = await getDoc(doc(db, 'users', user.uid));
             if (userDoc.exists()) {
-                setUserName(userDoc.data().username);
+                fetchedUserName = userDoc.data().username;
             }
 
-            dispatch(setUser({ email: user.email, uid: user.uid, idToken: token, userName: userName }));
+            dispatch(setUser({ email: user.email, uid: user.uid, idToken: token, userName: fetchedUserName }));
 
             toast.success('Авторизация прошла успешно');
             navigate('/facilities');
