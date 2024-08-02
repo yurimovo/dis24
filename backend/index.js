@@ -17,6 +17,7 @@ app.use('/api/facilities', require('./routes/facilities.routes'));
 app.use('/api/apartments', require('./routes/apartments.routes'));
 app.use('/api/simcards', require('./routes/simcards.routes'));
 app.use('/api/alarms', require('./routes/alarms.routes'));
+app.use('/api/departments', require('./routes/departments.routes'));
 //app.use('/api/users', require('./routes/users.routes'));
 
 app.listen(5000, () =>

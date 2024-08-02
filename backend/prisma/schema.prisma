@@ -52,14 +52,10 @@ model surving_organizations {
   org_name              String? @db.VarChar(50)
 }
 
-model assortments {
-  assort_id             Int     @id @unique(map: "Индекс 1") @default(autoincrement())
-  assort_name           String? @db.VarChar(50)
-}
-
-model responsibles {
-  resp_id             Int     @id @unique(map: "Индекс 1") @default(autoincrement())
-  resp_name           String? @db.VarChar(50)
+model employees {
+  employee_id           Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  emploee_name          String? @db.VarChar(100)
+  emploee_position      String? @db.VarChar(100)
 }
 
 model apartments {

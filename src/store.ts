@@ -18,6 +18,9 @@ class DisStore {
         id: '',
         token: '',
     };
+    selectedDepartmentId = 0;
+    selectedActiveDepartment = 0;
+    selectedEditingDepartment = 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -78,6 +81,18 @@ class DisStore {
             id: id,
             token: token
         };
+    };
+
+    changeDepartmentId = (departmentId: number) => {
+        this.selectedDepartmentId = departmentId;
+    };
+
+    changeActiveDepartment = (activeDepartment: number) => {
+        this.selectedActiveDepartment = activeDepartment;
+    };
+
+    changeEditingDepartment = (editingDepartment: number) => {
+        this.selectedEditingDepartment = editingDepartment;
     };
 };
 
