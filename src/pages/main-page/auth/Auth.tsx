@@ -22,6 +22,7 @@ const Auth = () => {
     const handleSignIn = async (event: React.FormEvent) => {
         event.preventDefault();
         let fetchedUserName = '';
+        let fetchedIsAdmin = false;
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
             const user = userCredential.user;
@@ -30,9 +31,16 @@ const Auth = () => {
             const userDoc = await getDoc(doc(db, 'users', user.uid));
             if (userDoc.exists()) {
                 fetchedUserName = userDoc.data().username;
+                fetchedIsAdmin = userDoc.data().isAdmin;
             }
 
-            dispatch(setUser({ email: user.email, uid: user.uid, idToken: token, userName: fetchedUserName }));
+            dispatch(setUser({ 
+                email: user.email, 
+                uid: user.uid, 
+                idToken: token, 
+                userName: fetchedUserName,
+                isAdmin: fetchedIsAdmin 
+            }));
 
             toast.success('Авторизация прошла успешно');
             navigate('/main');

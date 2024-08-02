@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useAuth } from 'hooks/userAuth.hook';
 
 import "./style.scss";
 
 const MenuBar = () => {
+    const { isAdmin } = useAuth();
+
     return (
         <nav className='container'>
             <ul className='menuContainer'>
@@ -28,6 +31,9 @@ const MenuBar = () => {
                 <li>
                     <a href="#"><Link to="/alarms">Ложняки</Link></a>
                 </li>
+                {isAdmin && <li>
+                    <a href="#"><Link to="/settings">Настройки</Link></a>
+                </li>}
             </ul>
         </nav>
     );

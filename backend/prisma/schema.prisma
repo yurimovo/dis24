@@ -7,6 +7,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model department {
+  department_id         Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  short_name            String? @db.VarChar(150)
+  full_name             String? @db.VarChar(350)
+  legal_address         String? @db.VarChar(250)
+  actual_address        String? @db.VarChar(250)
+  inn                   String? @db.VarChar(10)
+  company_director      String? @db.VarChar(50)
+}
+
+model hardware {
+  hardware_id           Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  hardware_name         String? @db.VarChar(20)
+}
+
+model security_types {
+  type_id               Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  type_name             String  @db.VarChar(10)
+}
+
+model facility_categories {
+  category_id           Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  category_name         String? @db.VarChar(50)
+}
+
+model apartment_categories {
+  category_id           Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  category_name         String? @db.VarChar(50)
+}
+
+model spi {
+  spi_id                Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  spi_name              String? @db.VarChar(50)
+}
+
+model mounting_organizations {
+  org_id                Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  org_name              String? @db.VarChar(50)
+}
+
+model surving_organizations {
+  org_id                Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  org_name              String? @db.VarChar(50)
+}
+
+model assortments {
+  assort_id             Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  assort_name           String? @db.VarChar(50)
+}
+
+model responsibles {
+  resp_id             Int     @id @unique(map: "Индекс 1") @default(autoincrement())
+  resp_name           String? @db.VarChar(50)
+}
+
 model apartments {
   apartment_id          Int     @id @unique(map: "Индекс 1") @default(autoincrement())
   owner                 String? @db.VarChar(150)

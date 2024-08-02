@@ -19,6 +19,7 @@ import Simcards from './pages/sim-cards/Simcards';
 import SimEdit from './pages/sim-cards/sim-edit/SimEdit';
 import SimInfo from './pages/sim-cards/sim-info/SimInfo';
 import Alarms from './pages/alarms/Alarms';
+import Settings from 'pages/settings/Settings';
 
 import "./main-container.scss";
 
@@ -45,6 +46,7 @@ function App() {
                     <Route path={'/simcard-edit/:id'} element={<SimEdit />} />
                     <Route path={'/simcard-info/:id'} element={<SimInfo />} />
                     <Route path={'/alarms'} element={<Alarms />} />
+                    <Route path={'/settings'} element={<Settings />} />
                     <Route path="*" element={<MainPage />} />
                 </Routes>
                 <ToastContainer 

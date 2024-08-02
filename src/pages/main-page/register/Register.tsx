@@ -16,6 +16,7 @@ const Register = () => {
     const [formEmail, setFormEmail] = useState('');
     const [formUsername, setFormUsername] = useState('');
     const [formPassword, setFormPassword] = useState('');
+    const [formIsAdmin, setFormIsAdmin] = useState(false);
 
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
@@ -30,6 +31,7 @@ const Register = () => {
             await setDoc(doc(db, 'users', user.uid), {
                 username: formUsername,
                 email: user.email,
+                isAdmin: formIsAdmin
             });
 
             if (user.email) {
@@ -37,7 +39,8 @@ const Register = () => {
                     email: user.email,
                     uid: user.uid,
                     idToken: idToken,
-                    userName: formUsername
+                    userName: formUsername,
+                    isAdmin: formIsAdmin
                 }));
                 navigate('/main');
             } else {
@@ -46,7 +49,6 @@ const Register = () => {
         } catch (error) {
             toast.error('Ошибка регистрации');
         }
-        //setAuthenticatedUser(user.email, user.uid, user.scs)
     };
 
     return (
@@ -74,6 +76,19 @@ const Register = () => {
                     onChange={(e) => setFormPassword(e.target.value)} 
                     placeholder="Пароль" 
                 />
+                <div className="form-check" style={{ marginBottom: '10px' }}>
+                    <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        value=""
+                        checked={formIsAdmin}
+                        onChange={(e) => setFormIsAdmin(e.target.checked)}
+                        id="isAdminCheckbox" 
+                    />
+                    <label className="form-check-label" htmlFor="isAdminCheckbox">
+                        Является администратором
+                    </label>
+                </div>
                 <Button className='register-form__button' variant='success' onClick={handleSignUp}>Зарегистрироваться</Button>
                 <div className='register-form__already-registered'>У вас уже есть аккаунт? <a href='/auth' className='register-form__link'>Войти</a></div>
             </form>

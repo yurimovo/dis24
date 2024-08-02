@@ -1,0 +1,17 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #fff5f2;
+
+    .settings__content {
+        width: 90%;
+        height: 60%;
+        border: 1px solid #b5533e;
+        border-radius: 8px;
+        padding: 30px;
+        background-color: #fad3ca;
+    }
+}
