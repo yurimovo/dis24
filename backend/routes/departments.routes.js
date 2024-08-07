@@ -51,7 +51,7 @@ router.delete('/department-delete/:id', async (req, res) => {
 
         res.status(200).json({
             message: 'Запись удалена',
-            sim: deletedDepartment
+            department: deletedDepartment
         });
     } catch (error) {
         console.error('Ошибка при удалении записи:', error);

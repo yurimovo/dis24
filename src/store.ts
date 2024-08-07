@@ -21,6 +21,9 @@ class DisStore {
     selectedDepartmentId = 0;
     selectedActiveDepartment = 0;
     selectedEditingDepartment = 0;
+    selectedHardwareId = 0;
+    selectedActiveHardware = 0;
+    selectedEditingHardware = 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -93,6 +96,18 @@ class DisStore {
 
     changeEditingDepartment = (editingDepartment: number) => {
         this.selectedEditingDepartment = editingDepartment;
+    };
+
+    changeHardwareId = (hardwareId: number) => {
+        this.selectedHardwareId = hardwareId;
+    };
+
+    changeActiveHardware = (activeHardware: number) => {
+        this.selectedActiveHardware = activeHardware;
+    };
+
+    changeEditingHardware = (editingHardware: number) => {
+        this.selectedEditingHardware = editingHardware;
     };
 };
 

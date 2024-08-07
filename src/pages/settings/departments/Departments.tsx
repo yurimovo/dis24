@@ -171,7 +171,7 @@ const Departments = () => {
             </Modal>
         </div>
     ) : (
-        <div className='container simcards' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className='container departments' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img src={Error403} alt='Доступ запрещен' style={{ width: '400px', height: 'auto' }} />
         </div>
     );
