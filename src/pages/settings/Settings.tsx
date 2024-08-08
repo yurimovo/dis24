@@ -28,7 +28,7 @@ const Settings = () => {
                 <Tabs selectedIndex={tabsIndex} onSelect={handleSetTabIndex}>
                     <TabList>
                         <Tab style={{ fontSize: '13px' }}>Подразделения</Tab>
-                        <Tab disabled style={{ fontSize: '13px' }}>Оборудование</Tab>
+                        <Tab style={{ fontSize: '13px' }}>Оборудование</Tab>
                         <Tab disabled style={{ fontSize: '13px' }}>Виды охраны</Tab>
                         <Tab disabled style={{ fontSize: '13px' }}>Категории объектов</Tab>
                         <Tab disabled style={{ fontSize: '13px' }}>Категории МХИГ</Tab>
