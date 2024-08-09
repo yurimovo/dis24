@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllHardware } from "service-functions/hardware/fetchAllHardware";
-import { createHardware } from "service-functions/hardware/createHardware";
-import { HardwareType, HardwareInList } from "types/hardware";
+import { fetchAllSectypes } from "service-functions/sectypes/fetchAllSectypes";
+import { createSectype } from "service-functions/sectypes/createSectype";
+import { Sectype, SectypeInList } from "types/sectypes";
 import { Watch } from "react-loader-spinner";
-import HardwareRow from "./hardware-row/HardwareRow";
+import SectypeRow from "./sectype-row/SectypeRow";
 import { toast } from "react-toastify";
 import { useAuth } from "hooks/userAuth.hook";
 import { Modal, Form, Button } from "react-bootstrap";
@@ -11,12 +11,12 @@ import Error403 from '../../../assetts/403.png';
 
 import "./style.scss";
 
-const Hardware = () => {
+const Sectypes = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [hardwareList, setHardwareList] = useState<Array<HardwareInList>>([]);
+    const [sectypeList, setSectypeList] = useState<Array<SectypeInList>>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [formData, setFormData] = useState<HardwareType>({
-        hardware_name: ''
+    const [formData, setFormData] = useState<Sectype>({
+        type_name: ''
     });
     const { isAuth } = useAuth();
 
@@ -26,15 +26,15 @@ const Hardware = () => {
 
     const handleToggleModal = () => setShowModal(!showModal);
 
-    const handleHardwareSave = async (e: React.FormEvent) => {
+    const handleSectypeSave = async (e: React.FormEvent) => {
         console.log('form data', formData);
         e.preventDefault();
         try {
-            await createHardware(formData);
-            toast.success('Оборудование добавлено', {
+            await createSectype(formData);
+            toast.success('Вид охраны добавлен', {
                 onClose: () => {
-                    fetchAllHardware().then((response) => {
-                        setHardwareList(response);
+                    fetchAllSectypes().then((response) => {
+                        setSectypeList(response);
                         setShowModal(false);
                     }).catch(error => {
                         console.error(error);
@@ -42,11 +42,11 @@ const Hardware = () => {
                 }
             });
         } catch (error) {
-            toast.error('Ошибка создания подразделения');
+            toast.error('Ошибка создания вида охраны');
         }
     };
 
-    const handleHardwareCancel = () => {
+    const handleSectypeCancel = () => {
         setShowModal(false);
     };
 
@@ -57,8 +57,8 @@ const Hardware = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetchAllHardware().then((response) => {
-            setHardwareList(response);
+        fetchAllSectypes().then((response) => {
+            setSectypeList(response);
             setLoading(false);
         }).catch(error => {
             console.error(error);
@@ -67,7 +67,7 @@ const Hardware = () => {
     },[]);
 
     return isAuth ? (
-        <div className='container hardware'>
+        <div className='container sectypes'>
             <div className='row'>
                 <div className='col-xl-12 col-lg-12-col-md-12' style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
                     <Button variant='success' onClick={handleToggleModal}>
@@ -81,7 +81,7 @@ const Hardware = () => {
                 <div className='col-xxl-9 col-xl-9 col-lg-9 col-md-9'>Наименование</div>
                 <div className='col-xxl-2 col-xl-2 col-lg-2 col-md-2'>Действия</div>
             </div>
-            {hardwareList.length === 0 ? 
+            {sectypeList.length === 0 ? 
                 <div style={{ 
                     display: 'flex', 
                     justifyContent: 'center', 
@@ -89,7 +89,7 @@ const Hardware = () => {
                     fontWeight: 500, 
                     fontSize: '32px', 
                     color: '#b5533e' 
-                }}>Оборудование отсутствует</div> : isLoading ? 
+                }}>Виды охраны отсутствуют</div> : isLoading ? 
                 <Watch
                     visible={true}
                     height="80"
@@ -106,9 +106,9 @@ const Hardware = () => {
                 /> :
                 <div className='row'>
                     {
-                        (hardwareList || []).map((hardware: HardwareInList, idx, key) => (
-                            <HardwareRow
-                                hardware={hardware}
+                        (sectypeList || []).map((sectype: SectypeInList, idx, key) => (
+                            <SectypeRow
+                                sectype={sectype}
                                 idx={idx+1}
                                 key={idx}
                                 reloadPage={reloadPage}
@@ -119,32 +119,32 @@ const Hardware = () => {
             }
             <Modal show={showModal} onHide={handleToggleModal} centered size='lg'>
                 <Modal.Header className='modalHeader' closeButton>
-                    <Modal.Title>Добавление оборудования</Modal.Title>
+                    <Modal.Title>Добавление вида охраны</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='modalBody'>
                     <div className='container'>
                         <div className='row justify-content-start align-items-start'>
                             <div className='col-xxl-12 col-xl-12 col-lg-12 col-md-12'>
-                                <Form.Control className='textField' type='text' placeholder='Наименование' id='hardware_name' onChange={handleChange} value={formData.hardware_name} />
+                                <Form.Control className='textField' type='text' placeholder='Наименование' id='sectype_name' onChange={handleChange} value={formData.type_name} />
                             </div>
                         </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                    <Button variant="secondary" onClick={handleHardwareCancel}>
+                    <Button variant="secondary" onClick={handleSectypeCancel}>
                         Закрыть
                     </Button>
-                    <Button variant="success" onClick={handleHardwareSave}>
+                    <Button variant="success" onClick={handleSectypeSave}>
                         Сохранить
                     </Button>
                 </Modal.Footer>
             </Modal>
         </div>
     ) : (
-        <div className='container hardware' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className='container sectypes' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img src={Error403} alt='Доступ запрещен' style={{ width: '400px', height: 'auto' }} />
         </div>
     );
 };
 
-export default Hardware;
+export default Sectypes;

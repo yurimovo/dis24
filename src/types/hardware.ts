@@ -1,4 +1,4 @@
-export type Hardware = {
+export type HardwareType = {
     hardware_name: string
 };
 

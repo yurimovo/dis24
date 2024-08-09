@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Departments from "./departments/Departments";
+import Hardware from "./hardware/Hardware";
+import Sectypes from "./sectypes/Sectypes";
+import Fcats from "./fcat/Fcats";
 import { useDispatch } from "react-redux";
 import { setTabIndex } from "redux-store/slices/tabsSlice";
 import { useTabs } from "hooks/useTabs.hook";
@@ -29,8 +32,8 @@ const Settings = () => {
                     <TabList>
                         <Tab style={{ fontSize: '13px' }}>Подразделения</Tab>
                         <Tab style={{ fontSize: '13px' }}>Оборудование</Tab>
-                        <Tab disabled style={{ fontSize: '13px' }}>Виды охраны</Tab>
-                        <Tab disabled style={{ fontSize: '13px' }}>Категории объектов</Tab>
+                        <Tab style={{ fontSize: '13px' }}>Виды охраны</Tab>
+                        <Tab style={{ fontSize: '13px' }}>Категории объектов</Tab>
                         <Tab disabled style={{ fontSize: '13px' }}>Категории МХИГ</Tab>
                         <Tab disabled style={{ fontSize: '13px' }}>Монтаж</Tab>
                         <Tab disabled style={{ fontSize: '13px' }}>Обслуживание</Tab>
@@ -43,15 +46,15 @@ const Settings = () => {
                     </TabPanel>
                     <TabPanel>
                         <h2 style={{ color: '#b5533e', textAlign: 'center' }}>Оборудование</h2>
-                        <p>Оборудование</p>
+                        <Hardware />
                     </TabPanel>
                     <TabPanel>
                         <h2 style={{ color: '#b5533e', textAlign: 'center' }}>Виды охраны</h2>
-                        <p>Виды охраны</p>
+                        <Sectypes />
                     </TabPanel>
                     <TabPanel>
                         <h2 style={{ color: '#b5533e', textAlign: 'center' }}>Категории объектов</h2>
-                        <p>Категории объектов</p>
+                        <Fcats />
                     </TabPanel>
                     <TabPanel>
                         <h2 style={{ color: '#b5533e', textAlign: 'center' }}>Категории МХИГ</h2>

@@ -1,6 +1,6 @@
-import { Hardware } from "../../types/hardware";
+import { HardwareType } from "../../types/hardware";
 
-export const createHardware = async (data: Hardware) => {
+export const createHardware = async (data: HardwareType) => {
     const hardwareData = JSON.stringify(data)
     try {
         await fetch('/api/hardware/hardware-add', {

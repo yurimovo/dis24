@@ -24,6 +24,12 @@ class DisStore {
     selectedHardwareId = 0;
     selectedActiveHardware = 0;
     selectedEditingHardware = 0;
+    selectedSectypeId = 0;
+    selectedActiveSectype = 0;
+    selectedEditingSectype = 0;
+    selectedFcatId = 0;
+    selectedActiveFcat = 0;
+    selectedEditingFcat = 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -108,6 +114,30 @@ class DisStore {
 
     changeEditingHardware = (editingHardware: number) => {
         this.selectedEditingHardware = editingHardware;
+    };
+
+    changeSectypeId = (sectypeId: number) => {
+        this.selectedSectypeId = sectypeId;
+    };
+
+    changeActiveSectype = (activeSectype: number) => {
+        this.selectedActiveSectype = activeSectype;
+    };
+
+    changeEditingSectype = (editingSectype: number) => {
+        this.selectedEditingSectype = editingSectype;
+    };
+
+    changeFcatId = (fcatId: number) => {
+        this.selectedFcatId = fcatId;
+    };
+
+    changeActiveFcat = (activeFcat: number) => {
+        this.selectedActiveFcat = activeFcat;
+    };
+
+    changeEditingFcat = (editingFcat: number) => {
+        this.selectedEditingFcat = editingFcat;
     };
 };
 
